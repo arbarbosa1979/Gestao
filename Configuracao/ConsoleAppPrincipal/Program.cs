@@ -1,37 +1,22 @@
-﻿namespace ConsoleAppPrincipal
+﻿using BLL;
+using Models;
+
+namespace ConsoleAppPrincipal
 {
     public class Program
     {
         private static void Main(string[] args)
         {
-            int x;
-            int y;
-            int z;
+            UsuarioBLL usuarioBLL = new UsuarioBLL();
+            Usuario usuario = new Usuario();
+            usuario.Nome = "Antonio Renato Barbosa";
+            usuario.NomeUsuario = "arenato";
+            usuario.Ativo = true;
+            usuario.Email = "arbarbosa1979@gmail.com";
+            usuario.CPF = "871.531.731-53";
+            usuario.Senha = "1234";
+            usuarioBLL.Inserir(usuario);
 
-            while (true)
-            {
-                Console.Clear();
-                Console.WriteLine("Informe o primeiro número: ");
-                y = Convert.ToInt32(Console.ReadLine());
-                Console.WriteLine("Informe o segundo número: ");
-                z = Convert.ToInt32(Console.ReadLine());
-
-                try
-                {
-                    x = y / z;
-                    Console.WriteLine("O resultado é: " + x);
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine("Ocorreu um erro ao tentar realizar a divisão: " + ex.Message);
-                }
-                finally
-                {
-
-                }
-                Console.WriteLine("\nPressione ENTER para continuar.");
-                Console.ReadLine();
-            }
         }
     }
 }
