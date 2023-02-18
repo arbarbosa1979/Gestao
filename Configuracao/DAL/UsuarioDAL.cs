@@ -11,10 +11,11 @@ namespace DAL
 
             try
             {
-                cn.ConnectionString = Conexao.StringdDeConexao;
+                cn.ConnectionString = Conexao.StringDeConexao;
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = cn;
                 cmd.CommandText = @"INSERT INTO USUARIO(NOME, NOME_USUARIO, CPF_USUARIO, EMAIL_USUARIO, SENHA_USUARIO, ATIVO)
+
                                     VALUES(@NOME, @NOME_USUARIO, @CPF_USUARIO, @EMAIL_USUARIO, @SENHA_USUARIO, @ATIVO)";
                 cmd.CommandType = System.Data.CommandType.Text;
                 cmd.Parameters.AddWithValue("@NOME", _usuario.Nome);
@@ -48,7 +49,7 @@ namespace DAL
         }
         public void Excluir(int _id)
         {
-
+ 
         }
 
     }

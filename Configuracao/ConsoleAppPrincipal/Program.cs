@@ -1,6 +1,5 @@
 ﻿using BLL;
 using Models;
-using System.Linq.Expressions;
 
 namespace ConsoleAppPrincipal
 {
@@ -18,7 +17,8 @@ namespace ConsoleAppPrincipal
                     usuario.Nome = Console.ReadLine();
                     Console.WriteLine("Digite o nome de usuário desejado: ");
                     usuario.NomeUsuario = Console.ReadLine();
-                    usuario.Ativo = true;
+                    Console.WriteLine("O usuário estará ativo? Escreva (S) ou (N)");
+                    usuario.Ativo = Console.ReadLine().ToUpper() == "S";
                     Console.WriteLine("Digite o email do usuário: ");
                     usuario.Email = Console.ReadLine();
                     Console.WriteLine("Digite o número do CPF com pontos e traços: ");

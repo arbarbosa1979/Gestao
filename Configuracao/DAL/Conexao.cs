@@ -2,7 +2,7 @@
 {
     public static class Conexao
     {
-        public static string StringdDeConexao 
+        public static string StringDeConexao 
         {
             get
             {
