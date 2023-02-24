@@ -39,7 +39,7 @@ namespace DAL
                 cn.Close();
             }
         }
-        public Usuario Buscar(string _nomeUsuario)
+        public Usuario BuscarPorNomeUsuario(string _nomeUsuario)
         {
             return new Usuario();
         }
