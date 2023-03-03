@@ -29,18 +29,75 @@ namespace DAL
 
                 cn.Open();
                 cmd.ExecuteScalar();
-                
-                    //SqlCommand cmd = new SqlCommand("SELECT * FROM USUARIO ORDER BY Nome", cn);
+				
             }
             catch (Exception ex)
             {
-                throw new Exception("Ocorreu um erro ao tentar inserir um usuário no banco: " + ex.Message);
+                throw new Exception("Ocorreu um erro ao tentar inserir o usuário no banco de dados: " + ex.Message);
             }
             finally
             {
                 cn.Close();
             }
         }
+		public void Alterar(Usuario _usuario)
+		{
+			SqlConnection cn = new SqlConnection();
+			try
+			{
+				cn.ConnectionString = Conexao.StringDeConexao;
+				SqlCommand cmd = new SqlCommand();
+				cmd.Connection = cn;
+				cmd.CommandText = @"UPDATE USUARIO SET 
+										NOME = @NOME, 
+										CPF_USUARIO = @CPF_USUARIO, 
+										EMAIL_USUARIO = @EMAIL_USUARIO,
+										ATIVO = @ATIVO 
+									WHERE ID_USUARIO = @ID_USUARIO";
+				cmd.CommandType = System.Data.CommandType.Text;
+				cmd.Parameters.AddWithValue("@NOME", _usuario.Nome);
+				cmd.Parameters.AddWithValue("@CPF_USUARIO", _usuario.CPF);
+				cmd.Parameters.AddWithValue("@EMAIL_USUARIO", _usuario.Email);
+				cmd.Parameters.AddWithValue("@ATIVO", _usuario.Ativo);
+				cmd.Parameters.AddWithValue("@ID_USUARIO", _usuario.Id);
+
+				cn.Open();
+				cmd.ExecuteNonQuery();
+			}
+			catch (Exception ex)
+			{
+				throw new Exception("Ocorreu um erro ao tentar atualizar o usuário no banco de dados: " + ex.Message);
+			}
+			finally
+			{
+				cn.Close();
+			}
+		}
+
+		public void Excluir(int _id)
+		{
+			SqlConnection cn = new SqlConnection();
+			try
+			{
+				cn.ConnectionString = Conexao.StringDeConexao;
+				SqlCommand cmd = new SqlCommand();
+				cmd.Connection = cn;
+				cmd.CommandText = @"DELETE FROM USUARIO WHERE ID_USUARIO = @ID_USUARIO";
+				cmd.CommandType = System.Data.CommandType.Text;
+				cmd.Parameters.AddWithValue("@ID_USUARIO", _id);
+
+				cn.Open();
+				cmd.ExecuteNonQuery();
+			}
+			catch (Exception ex)
+			{
+				throw new Exception("Ocorreu um erro ao tentar excluir o usuário no banco de dados: " + ex.Message);
+			}
+			finally
+			{
+				cn.Close();
+			}
+		}
         public Usuario BuscarPorNomeUsuario(string _nomeUsuario)
         {
             Usuario usuario = new Usuario();
@@ -86,7 +143,7 @@ namespace DAL
                 cn.Close();
             }
         }
-        public List<Usuario> BuscarTodos()
+        public List<Usuario> ExibirTodosUsuarios()
         {
             List<Usuario> usuarios = new List<Usuario>();
             Usuario usuario;
@@ -128,15 +185,6 @@ namespace DAL
             {
                 cn.Close();
             }
-        }
-        public void Alterar(Usuario _usuario)
-        {
-
-        }
-        public void Excluir(int _id)
-        {
- 
-        }
-
+        }		
     }
 }
