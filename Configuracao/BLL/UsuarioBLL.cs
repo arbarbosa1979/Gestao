@@ -45,10 +45,10 @@ namespace BLL
             return usuarioDAL.BuscarPorNomeUsuario(_nomeUsuario);
 
         }
-        public List<Usuario> BuscarTodos()
+        public List<Usuario> ExibirTodosUsuarios()
         {
             UsuarioDAL usuarioDAL = new UsuarioDAL();
-            return usuarioDAL.BuscarTodos();
+            return usuarioDAL.ExibirTodosUsuarios();
         }
 		private void ValidarDados(Usuario _usuario)
 		{

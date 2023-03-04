@@ -1,5 +1,6 @@
 ﻿using Models;
 using System;
+using System.Collections.Generic;
 using System.Data.SqlClient;
 
 namespace DAL
@@ -31,8 +32,9 @@ namespace DAL
             {
                 cn.Close();
             }
+
         }
-		public void Alterar(Permissao _permissao)
+        public void Alterar(Permissao _permissao)
         {
             SqlConnection cn = new SqlConnection();
             try
@@ -62,7 +64,8 @@ namespace DAL
             {
                 cn.Close();
             }
-        public void Excluir(int id)
+        }
+        public void Excluir(int _id)
         {
             SqlConnection cn = new SqlConnection();
 
@@ -73,7 +76,7 @@ namespace DAL
                 cmd.Connection = cn;
                 cmd.CommandText = @"DELETE FROM Permissao WHERE ID = @ID";
                 cmd.CommandType = System.Data.CommandType.Text;
-                cmd.Parameters.AddWithValue("@ID", id);
+                cmd.Parameters.AddWithValue("@ID", _id);
 
                 cn.Open();
                 cmd.ExecuteScalar();
@@ -87,8 +90,8 @@ namespace DAL
                 cn.Close();
             }
         }
-        }
-		public Permissao BuscarPorId(int _id)
+
+        public Permissao BuscarPorId(int _id)
         {
             Permissao permissao = new Permissao();
             SqlConnection cn = new SqlConnection();
@@ -107,7 +110,7 @@ namespace DAL
                     while (rd.Read())
                     {
                         permissao = new Permissao();
-                        permissao.IdDescricao = Convert.ToInt32(rd["IdDescricao"]);
+                        permissao.Id= Convert.ToInt32(rd["IdDescricao"]);
                         permissao.Descricao = rd["Descricao"].ToString();
                     }
                 }
@@ -123,7 +126,7 @@ namespace DAL
             }
             return permissao;
         }
-		public List<Permissao> ExibirTodasPermissoes()
+        public List<Permissao> ExibirTodasPermissoes()
         {
             SqlConnection cn = new SqlConnection();
 
@@ -161,4 +164,3 @@ namespace DAL
         }
     }
 }
-

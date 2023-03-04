@@ -47,18 +47,19 @@ namespace BLL
         {
             if (id <= 0)
                 throw new Exception("O ID da permissão deve ser um número inteiro maior que zero.");
-
+            PermissaoDAL _permissaoDAL = new PermissaoDAL();
             _permissaoDAL.Excluir(id);
         }		
         public Permissao BuscarPorID(int id)
         {
             if (id <= 0)
                 throw new Exception("O ID da permissão deve ser um número inteiro maior que zero.");
-
+			PermissaoDAL _permissaoDAL = new PermissaoDAL();
             return _permissaoDAL.BuscarPorId(id);
         }
         public List<Permissao> ExibirTodasPermissoes()
         {
+            PermissaoDAL _permissaoDAL = new PermissaoDAL();
             return _permissaoDAL.ExibirTodasPermissoes();
         }
     }
