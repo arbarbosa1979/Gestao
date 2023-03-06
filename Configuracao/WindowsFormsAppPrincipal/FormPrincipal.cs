@@ -1,6 +1,14 @@
-﻿using System.Windows.Forms;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
 
-namespace WindowsFormsAppPrincipal
+namespace WindowsFormsApp
 {
     public partial class FormPrincipal : Form
     {
@@ -9,16 +17,16 @@ namespace WindowsFormsAppPrincipal
             InitializeComponent();
         }
 
-        private void cadastroToolStripMenuItem_Click(object sender, System.EventArgs e)
+        private void FormPrincipal_Load(object sender, EventArgs e)
         {
 
         }
 
-        private void usuárioToolStripMenuItem_Click(object sender, System.EventArgs e)
+        private void usuariosToolStripMenuItem_Click(object sender, EventArgs e)
         {
             using (FormBuscarUsuario frm = new FormBuscarUsuario())
             {
-                frm.ShowDialog();   
+                frm.ShowDialog();
             }
         }
     }
