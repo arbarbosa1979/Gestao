@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BLL;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -32,9 +33,13 @@ namespace WindowsFormsApp
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void buttonBuscar_Click(object sender, EventArgs e)
         {
-
+            UsuarioBLL usuarioBLL = new UsuarioBLL();
+            if (textBoxBuscar.Text == "")
+                usuarioBindingSource.DataSource = usuarioBLL.ExibirTodosUsuarios();   
+            else
+                usuarioBindingSource.DataSource = usuarioBLL.BuscarPorNomeUsuario(textBoxBuscar.Text);
         }
 
         private void button2_Click(object sender, EventArgs e)

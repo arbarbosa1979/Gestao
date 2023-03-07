@@ -155,8 +155,8 @@ namespace DAL
             {
                 cn.ConnectionString = Conexao.StringDeConexao;
                 cmd.Connection = cn;
-                cmd.CommandText = @"SELECT Id, Nome, CPF, Email, Ativo 
-                                    FROM Usuario";
+                cmd.CommandText = @"SELECT ID_USUARIO, NOME_USUARIO, CPF_USUARIO, EMAIL_USUARIO, ATIVO 
+                                    FROM USUARIO";
                 cmd.CommandType = System.Data.CommandType.Text;
                 cn.Open();
 
@@ -165,12 +165,12 @@ namespace DAL
                     while (rd.Read())
                     {
                         usuario = new Usuario();
-                        usuario.Id = Convert.ToInt32(rd["Id"]);
-                        usuario.Nome = rd["Nome"].ToString();
-                        usuario.NomeUsuario = rd["NomeUsuario"].ToString();
-                        usuario.CPF = rd["CPF"].ToString();
-                        usuario.Email = rd["Email"].ToString();
-                        usuario.Ativo = Convert.ToBoolean(rd["Ativo"]);
+                        usuario.Id = Convert.ToInt32(rd["ID_USUARIO"]);
+                        usuario.Nome = rd["NOME_USUARIO"].ToString();
+                        usuario.NomeUsuario = rd["NOME_USUARIO"].ToString();
+                        usuario.CPF = rd["CPF_USUARIO"].ToString();
+                        usuario.Email = rd["EMAIL_USUARIO"].ToString();
+                        usuario.Ativo = Convert.ToBoolean(rd["ATIVO"]);
 
                         usuarios.Add(usuario);
                     }
