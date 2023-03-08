@@ -28,7 +28,7 @@ namespace WindowsFormsApp
 
         }
 
-        private void button4_Click(object sender, EventArgs e)
+        private void buttonExcluir_Click(object sender, EventArgs e)
         {
 
         }
@@ -42,22 +42,22 @@ namespace WindowsFormsApp
                 usuarioBindingSource.DataSource = usuarioBLL.BuscarPorNomeUsuario(textBoxBuscar.Text);
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void buttonAlterar_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void buttonAdicionar_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void button6_Click(object sender, EventArgs e)
+        private void buttonAdicionarGrupoUsuario_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void button5_Click(object sender, EventArgs e)
+        private void buttonExcluirGrupoUsuario_Click(object sender, EventArgs e)
         {
 
         }

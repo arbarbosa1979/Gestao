@@ -16,12 +16,6 @@ namespace WindowsFormsApp
         {
             InitializeComponent();
         }
-
-        private void FormPrincipal_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private void usuariosToolStripMenuItem_Click(object sender, EventArgs e)
         {
             using (FormBuscarUsuario frm = new FormBuscarUsuario())
