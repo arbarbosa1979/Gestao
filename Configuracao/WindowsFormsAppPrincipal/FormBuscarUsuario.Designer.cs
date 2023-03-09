@@ -235,12 +235,12 @@
             this.dataGridViewTextBoxColumn6,
             this.dataGridViewCheckBoxColumn1});
             this.usuarioDataGridView.DataSource = this.usuarioBindingSource;
-            this.usuarioDataGridView.Location = new System.Drawing.Point(12, 106);
+            this.usuarioDataGridView.Location = new System.Drawing.Point(6, 106);
             this.usuarioDataGridView.Name = "usuarioDataGridView";
             this.usuarioDataGridView.ReadOnly = true;
             this.usuarioDataGridView.RowHeadersWidth = 51;
             this.usuarioDataGridView.RowTemplate.Height = 24;
-            this.usuarioDataGridView.Size = new System.Drawing.Size(661, 327);
+            this.usuarioDataGridView.Size = new System.Drawing.Size(661, 384);
             this.usuarioDataGridView.TabIndex = 3;
             this.usuarioDataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.usuarioDataGridView_CellContentClick);
             // 
@@ -301,12 +301,12 @@
             this.grupoUsuariosDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dataGridViewTextBoxColumn5});
             this.grupoUsuariosDataGridView.DataSource = this.grupoUsuariosBindingSource;
-            this.grupoUsuariosDataGridView.Location = new System.Drawing.Point(675, 106);
+            this.grupoUsuariosDataGridView.Location = new System.Drawing.Point(673, 106);
             this.grupoUsuariosDataGridView.Name = "grupoUsuariosDataGridView";
             this.grupoUsuariosDataGridView.ReadOnly = true;
             this.grupoUsuariosDataGridView.RowHeadersWidth = 51;
             this.grupoUsuariosDataGridView.RowTemplate.Height = 24;
-            this.grupoUsuariosDataGridView.Size = new System.Drawing.Size(334, 327);
+            this.grupoUsuariosDataGridView.Size = new System.Drawing.Size(336, 384);
             this.grupoUsuariosDataGridView.TabIndex = 4;
             // 
             // dataGridViewTextBoxColumn5

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BLL;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,6 +16,15 @@ namespace WindowsFormsApp
         public FormBuscarGrupoUsuario()
         {
             InitializeComponent();
+        }
+
+        private void buttonBuscar_Click(object sender, EventArgs e)
+        {
+            GrupoUsuarioBLL grupousuarioBLL = new GrupoUsuarioBLL();
+            if (textBoxBuscar.Text == "")
+                grupoUsuarioBindingSource.DataSource = grupousuarioBLL.ExibirTodosGrupos();
+            else
+                grupoUsuarioBindingSource.DataSource = grupousuarioBLL.BuscarGrupoPorNome(textBoxBuscar.Text);
         }
     }
 }

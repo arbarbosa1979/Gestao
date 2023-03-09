@@ -29,12 +29,12 @@ namespace BLL
             grupoUsuarioDAL.Alterar(grupoUsuario);
         }
 
-        public GrupoUsuario BuscarPorId(int id)
+        public GrupoUsuario BuscarGrupoPorNome(string _nome)
         {
-            return grupoUsuarioDAL.BuscarPorID(id);
+            return grupoUsuarioDAL.BuscarGrupoPorNome(_nome);
         }
 
-        public List<GrupoUsuario> ExibirTodos()
+        public List<GrupoUsuario> ExibirTodosGrupos()
         {
             return grupoUsuarioDAL.ExibirTodosGrupos();
         }
