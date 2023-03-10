@@ -242,7 +242,6 @@
             this.usuarioDataGridView.RowTemplate.Height = 24;
             this.usuarioDataGridView.Size = new System.Drawing.Size(661, 384);
             this.usuarioDataGridView.TabIndex = 3;
-            this.usuarioDataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.usuarioDataGridView_CellContentClick);
             // 
             // dataGridViewTextBoxColumn7
             // 
@@ -396,7 +395,6 @@
             this.MinimumSize = new System.Drawing.Size(1039, 549);
             this.Name = "FormBuscarUsuario";
             this.Text = "Gestão de usuário";
-            this.Load += new System.EventHandler(this.FormBuscarUsuario_Load);
             ((System.ComponentModel.ISupportInitialize)(this.usuarioBindingNavigator)).EndInit();
             this.usuarioBindingNavigator.ResumeLayout(false);
             this.usuarioBindingNavigator.PerformLayout();

@@ -1,13 +1,7 @@
 ﻿using BLL;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace WindowsFormsApp
 {
@@ -17,36 +11,44 @@ namespace WindowsFormsApp
         {
             InitializeComponent();
         }
-
-        private void FormBuscarUsuario_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void usuarioDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
         private void buttonExcluir_Click(object sender, EventArgs e)
         {
+            try
+            {
+                int id = int.Parse(textBoxId.Text);
 
+                // Cria uma instância da classe UsuarioBLL
+                UsuarioBLL usuarioBLL = new UsuarioBLL();
+
+                // Chamar o método Excluir passando a ID do usuário
+                usuarioBLL.Excluir(id);
+
+                // Mostra uma mensagem de de operação concluída com sucesso
+                MessageBox.Show("Usuário excluído com sucesso!");
+
+                // Clear the textboxes
+                textBoxNome.Text = "";
+                textBoxEmail.Text = "";
+                textBoxSenha.Text = "";
+                textBoxId.Text = "";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erro ao excluir usuário: " + ex.Message);
+            }
         }
-
-        private void buttonBuscar_Click(object sender, EventArgs e)
+      private void buttonBuscar_Click(object sender, EventArgs e)
         {
             UsuarioBLL usuarioBLL = new UsuarioBLL();
             if (textBoxBuscar.Text == "")
-                usuarioBindingSource.DataSource = usuarioBLL.ExibirTodosUsuarios();   
+                usuarioBindingSource.DataSource = usuarioBLL.ExibirTodosUsuarios();
             else
                 usuarioBindingSource.DataSource = usuarioBLL.BuscarPorNomeUsuario(textBoxBuscar.Text);
         }
-
         private void buttonAlterar_Click(object sender, EventArgs e)
         {
 
         }
-
         private void buttonAdicionar_Click(object sender, EventArgs e)
         {
 
