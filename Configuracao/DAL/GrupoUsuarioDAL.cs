@@ -84,7 +84,7 @@ namespace DAL
                 cn.Close();
             }
         }
-		public GrupoUsuario BuscarGrupoPorNome(string _nome)
+        public GrupoUsuario BuscarPorIdUsuario(int id)
         {
             SqlConnection cn = new SqlConnection();
             GrupoUsuario grupoUsuario = null;
@@ -94,9 +94,9 @@ namespace DAL
                 cn.ConnectionString = Conexao.StringDeConexao;
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = cn;
-                cmd.CommandText = @"SELECT ID, NomeDoGrupo FROM GrupoUsuario WHERE NomeDoGrupo = @nome";
+                cmd.CommandText = @"SELECT * FROM GrupoUsuario WHERE ID = @ID";
                 cmd.CommandType = System.Data.CommandType.Text;
-                cmd.Parameters.AddWithValue("@nome", _nome);
+                cmd.Parameters.AddWithValue("@ID", id);
 
                 cn.Open();
 
@@ -113,14 +113,14 @@ namespace DAL
             }
             catch (Exception ex)
             {
-                throw new Exception("Ocorreu um erro ao tentar buscar o grupo do usuário no banco: " + ex.Message);
+                throw new Exception("Ocorreu um erro ao tentar buscar o grupo de usuário no banco: " + ex.Message);
             }
             finally
             {
                 cn.Close();
             }
         }
-		public List<GrupoUsuario> ExibirTodosGrupos()
+        public List<GrupoUsuario> ExibirTodosGrupos()
         {
             SqlConnection cn = new SqlConnection();
             List<GrupoUsuario> listaGrupoUsuarios = new List<GrupoUsuario>();
