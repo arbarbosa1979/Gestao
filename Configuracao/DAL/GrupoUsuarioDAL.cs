@@ -45,7 +45,7 @@ namespace DAL
                 cmd.CommandText = @"UPDATE GrupoUsuario SET NomeGrupo = @NomeGrupo WHERE ID = @ID";
                 cmd.CommandType = System.Data.CommandType.Text;
                 cmd.Parameters.AddWithValue("@NomeGrupo", _grupoUsuario.NomeGrupo);
-                cmd.Parameters.AddWithValue("@ID", _grupoUsuario.ID);
+                cmd.Parameters.AddWithValue("@ID", _grupoUsuario.IdGrupoUser);
 
                 cn.Open();
                 cmd.ExecuteScalar();
@@ -84,7 +84,7 @@ namespace DAL
                 cn.Close();
             }
         }
-        public GrupoUsuario BuscarPorIdUsuario(int id)
+        public GrupoUsuario BuscarPorIdGrupo(int _id)
         {
             SqlConnection cn = new SqlConnection();
             GrupoUsuario grupoUsuario = null;
@@ -96,7 +96,7 @@ namespace DAL
                 cmd.Connection = cn;
                 cmd.CommandText = @"SELECT * FROM GrupoUsuario WHERE ID = @ID";
                 cmd.CommandType = System.Data.CommandType.Text;
-                cmd.Parameters.AddWithValue("@ID", id);
+                cmd.Parameters.AddWithValue("@ID", _id);
 
                 cn.Open();
 
@@ -105,7 +105,7 @@ namespace DAL
                 if (dr.Read())
                 {
                     grupoUsuario = new GrupoUsuario();
-                    grupoUsuario.ID = Convert.ToInt32(dr["ID"]);
+                    grupoUsuario.IdGrupoUser = Convert.ToInt32(dr["ID"]);
                     grupoUsuario.NomeGrupo = dr["NomeGrupo"].ToString();
                 }
 
@@ -140,7 +140,7 @@ namespace DAL
                 while (dr.Read())
                 {
                     GrupoUsuario grupoUsuario = new GrupoUsuario();
-                    grupoUsuario.ID = Convert.ToInt32(dr["ID"]);
+                    grupoUsuario.IdGrupoUser = Convert.ToInt32(dr["ID"]);
                     grupoUsuario.NomeGrupo = dr["NomeGrupo"].ToString();
                     listaGrupoUsuarios.Add(grupoUsuario);
                 }

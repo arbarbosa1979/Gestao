@@ -59,7 +59,7 @@ namespace DAL
 				cmd.Parameters.AddWithValue("@CPF_USUARIO", _usuario.CPF);
 				cmd.Parameters.AddWithValue("@EMAIL_USUARIO", _usuario.Email);
 				cmd.Parameters.AddWithValue("@ATIVO", _usuario.Ativo);
-				cmd.Parameters.AddWithValue("@ID_USUARIO", _usuario.Id);
+				cmd.Parameters.AddWithValue("@ID_USUARIO", _usuario.IdUser);
 
 				cn.Open();
 				cmd.ExecuteNonQuery();
@@ -119,7 +119,7 @@ namespace DAL
                     if (rd.Read())
                     {
                         usuario = new Usuario();
-                        usuario.Id = Convert.ToInt32(rd["ID_USUARIO"]);
+                        usuario.IdUser = Convert.ToInt32(rd["ID_USUARIO"]);
                         usuario.Nome = rd["NOME"].ToString();
                         usuario.NomeUsuario = rd["NOME_USUARIO"].ToString();
                         usuario.CPF = rd["CPF_USUARIO"].ToString();
@@ -127,59 +127,7 @@ namespace DAL
                         usuario.Ativo = Convert.ToBoolean(rd["ATIVO"]);
 
                         GrupoUsuarioDAL grupoUsuarioDAL = new GrupoUsuarioDAL();
-                        usuario.GrupoUsuarios = grupoUsuarioDAL.BuscarPorIdUsuario(usuario Id);
-                        ExibirTodosUsuarios().Add(usuario);
-
-                    }
-                    else
-                    {
-                        throw new Exception("Usuário não encontrado.");
-                    }
-                }
-                return usuario;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Ocorreu um erro ao tentar buscar o usuario digitado: " + ex.Message);
-            }
-            finally
-            {
-                cn.Close();
-            }
-        }
-        public Usuario BuscarPorIdUsuario(string _id)
-        {
-            Usuario usuario = new Usuario();
-            SqlConnection cn = new SqlConnection();
-            SqlCommand cmd = new SqlCommand();
-
-            try
-            {
-                cn.ConnectionString = Conexao.StringDeConexao;
-                cmd.Connection = cn;
-                cmd.CommandText = @"SELECT ID_USUARIO, NOME, NOME_USUARIO, CPF_USUARIO, EMAIL_USUARIO, ATIVO FROM USUARIO WHERE ID_USUARIO = @ID_USUARIO";
-
-                cmd.Parameters.AddWithValue("@ID_USUARIO", _id);
-                cmd.CommandType = System.Data.CommandType.Text;
-                cn.Open();
-
-                using (SqlDataReader rd = cmd.ExecuteReader())
-                {
-                    if (rd.Read())
-                    {
-                        usuario = new Usuario();
-                        usuario.Id = Convert.ToInt32(rd["ID_USUARIO"]);
-                        usuario.Nome = rd["NOME"].ToString();
-                        usuario.NomeUsuario = rd["NOME_USUARIO"].ToString();
-                        usuario.CPF = rd["CPF_USUARIO"].ToString();
-                        usuario.Email = rd["EMAIL_USUARIO"].ToString();
-                        usuario.Ativo = Convert.ToBoolean(rd["ATIVO"]);
-
-                        GrupoUsuarioDAL grupoUsuarioDAL = new GrupoUsuarioDAL();
-                        usuario.GrupoUsuarios = grupoUsuarioDAL.BuscarPorIdUsuario(usuario id);
-                        ExibirTodosUsuarios().Add(usuario);
-
-                    }
+                        usuario.GrupoUsuarios = grupoUsuarioDAL.BuscarPorIdGrupo(usuario.IdUser);                   }
                     else
                     {
                         throw new Exception("Usuário não encontrado.");
@@ -218,12 +166,14 @@ namespace DAL
                     while (rd.Read())
                     {
                         usuario = new Usuario();
-                        usuario.Id = Convert.ToInt32(rd["ID_USUARIO"]);
+                        usuario.IdUser = Convert.ToInt32(rd["ID_USUARIO"]);
                         usuario.Nome = rd["NOME_USUARIO"].ToString();
                         usuario.NomeUsuario = rd["NOME_USUARIO"].ToString();
                         usuario.CPF = rd["CPF_USUARIO"].ToString();
                         usuario.Email = rd["EMAIL_USUARIO"].ToString();
                         usuario.Ativo = Convert.ToBoolean(rd["ATIVO"]);
+                        GrupoUsuarioDAL grupoUsuarioDAL = new GrupoUsuarioDAL();
+                        usuario.GrupoUsuarios = grupoUsuarioDAL.BuscarPorIdGrupo(usuario.IdUser);
 
                         usuarios.Add(usuario);
                     }

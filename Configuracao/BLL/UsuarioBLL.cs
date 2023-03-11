@@ -25,7 +25,7 @@ namespace BLL
 
 			Usuario usuario = new Usuario();
 			Usuario usuarioExistente = BuscarPorNomeUsuario(_usuario.NomeUsuario);
-			if (usuarioExistente != null && usuarioExistente.Id != _usuario.Id)
+			if (usuarioExistente != null && usuarioExistente.IdUser != _usuario.IdUser)
 				throw new Exception("Já existe um usuário com este nome.");
 
 			UsuarioDAL usuarioDAL = new UsuarioDAL();
