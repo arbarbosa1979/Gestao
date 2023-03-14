@@ -127,10 +127,7 @@ namespace DAL
                         usuario.Ativo = Convert.ToBoolean(rd["ATIVO"]);
 
                         GrupoUsuarioDAL grupoUsuarioDAL = new GrupoUsuarioDAL();
-                        usuario.GrupoUsuarios = grupoUsuarioDAL.BuscarPorIdGrupo(usuario.IdUser);                   }
-                    else
-                    {
-                        throw new Exception("Usuário não encontrado.");
+                        usuario.GrupoUsuarios = grupoUsuarioDAL.BuscarPorIdGrupo(usuario.IdUser);
                     }
                 }
                 return usuario;

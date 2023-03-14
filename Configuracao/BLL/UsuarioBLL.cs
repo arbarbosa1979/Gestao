@@ -7,9 +7,9 @@ namespace BLL
 {
     public class UsuarioBLL
     {
-        public void Inserir(Usuario _usuario)
+        public void Inserir(Usuario _usuario, string _confirmacaodeSenha)
         {
-            ValidarDados(_usuario);
+            ValidarDados(_usuario, _confirmacaodeSenha);
 
             Usuario usuario = new Usuario();
             usuario = BuscarPorNomeUsuario(_usuario.NomeUsuario);
@@ -19,9 +19,9 @@ namespace BLL
             UsuarioDAL usuarioDAL = new UsuarioDAL();
             usuarioDAL.Inserir(_usuario);
         }
-		public void Alterar(Usuario _usuario)
+		public void Alterar(Usuario _usuario, string _confirmacaodeSenha)
 		{
-			ValidarDados(_usuario);
+			ValidarDados(_usuario, _confirmacaodeSenha);
 
 			Usuario usuario = new Usuario();
 			Usuario usuarioExistente = BuscarPorNomeUsuario(_usuario.NomeUsuario);
@@ -50,7 +50,7 @@ namespace BLL
             UsuarioDAL usuarioDAL = new UsuarioDAL();
             return usuarioDAL.ExibirTodosUsuarios();
         }
-		private void ValidarDados(Usuario _usuario)
+		private void ValidarDados(Usuario _usuario, string _confirmacaodeSenha)
 		{
 			if (_usuario.NomeUsuario?.Length <= 3 || _usuario.NomeUsuario?.Length >= 50)
 				throw new Exception("O nome de usuário deve ter mais de três caracteres.");
@@ -63,6 +63,9 @@ namespace BLL
 
 			if (_usuario.Senha?.Length < 7 || _usuario.Senha?.Length > 11)
 				throw new Exception("A senha deve ter entre 7 e 11 caracteres.");
+			
+			if (_confirmacaodeSenha != _usuario.Senha)
+				throw new Exception("A senha e a confirmação da senha não são iguais.");
 
 			if (!IsValidEmail(_usuario.Email))
 				throw new Exception("O endereço de e-mail informado é inválido.");

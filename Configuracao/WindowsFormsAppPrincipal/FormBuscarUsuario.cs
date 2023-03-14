@@ -51,7 +51,11 @@ namespace WindowsFormsApp
         }
         private void buttonAdicionar_Click(object sender, EventArgs e)
         {
-
+            using (FormCadastroUsuario frm = new FormCadastroUsuario())
+            {
+                frm.ShowDialog();
+            }
+            buttonBuscar_Click(sender, e);
         }
 
         private void buttonAdicionarGrupoUsuario_Click(object sender, EventArgs e)

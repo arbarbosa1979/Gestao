@@ -28,189 +28,233 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
+            this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.Label nomeLabel;
+            System.Windows.Forms.Label nomeUsuarioLabel;
+            System.Windows.Forms.Label senhaLabel;
+            System.Windows.Forms.Label emailLabel;
+            System.Windows.Forms.Label cPFLabel;
+            this.buttonSalvar = new System.Windows.Forms.Button();
+            this.buttonCancelar = new System.Windows.Forms.Button();
+            this.usuarioBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.nomeTextBox = new System.Windows.Forms.TextBox();
+            this.nomeUsuarioTextBox = new System.Windows.Forms.TextBox();
+            this.senhaTextBox = new System.Windows.Forms.TextBox();
+            this.emailTextBox = new System.Windows.Forms.TextBox();
+            this.cPFTextBox = new System.Windows.Forms.TextBox();
+            this.confirmacaoSenhatextBox = new System.Windows.Forms.TextBox();
+            this.ativoCheckBox = new System.Windows.Forms.CheckBox();
+            this.confirmacaoSenhaLabel = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.maskedTextBoxCPF = new System.Windows.Forms.MaskedTextBox();
-            this.textNome = new System.Windows.Forms.TextBox();
-            this.textNomeUsuario = new System.Windows.Forms.TextBox();
-            this.textBoxEmail = new System.Windows.Forms.TextBox();
-            this.textSenha = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
+            nomeLabel = new System.Windows.Forms.Label();
+            nomeUsuarioLabel = new System.Windows.Forms.Label();
+            senhaLabel = new System.Windows.Forms.Label();
+            emailLabel = new System.Windows.Forms.Label();
+            cPFLabel = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.usuarioBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
-            // label1
+            // buttonSalvar
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(61, 86);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(44, 16);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Nome";
+            this.buttonSalvar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonSalvar.Location = new System.Drawing.Point(843, 335);
+            this.buttonSalvar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.buttonSalvar.Name = "buttonSalvar";
+            this.buttonSalvar.Size = new System.Drawing.Size(100, 28);
+            this.buttonSalvar.TabIndex = 7;
+            this.buttonSalvar.Text = "Salvar";
+            this.buttonSalvar.UseVisualStyleBackColor = true;
+            this.buttonSalvar.Click += new System.EventHandler(this.buttonSalvar_Click);
+            // 
+            // buttonCancelar
+            // 
+            this.buttonCancelar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonCancelar.Location = new System.Drawing.Point(977, 335);
+            this.buttonCancelar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.buttonCancelar.Name = "buttonCancelar";
+            this.buttonCancelar.Size = new System.Drawing.Size(100, 28);
+            this.buttonCancelar.TabIndex = 7;
+            this.buttonCancelar.Text = "Cancelar";
+            this.buttonCancelar.UseVisualStyleBackColor = true;
+            this.buttonCancelar.Click += new System.EventHandler(this.buttonCancelar_Click);
+            // 
+            // usuarioBindingSource
+            // 
+            this.usuarioBindingSource.DataSource = typeof(Models.Usuario);
+            // 
+            // nomeLabel
+            // 
+            nomeLabel.AutoSize = true;
+            nomeLabel.Location = new System.Drawing.Point(12, 97);
+            nomeLabel.Name = "nomeLabel";
+            nomeLabel.Size = new System.Drawing.Size(47, 16);
+            nomeLabel.TabIndex = 8;
+            nomeLabel.Text = "Nome:";
+            // 
+            // nomeTextBox
+            // 
+            this.nomeTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.usuarioBindingSource, "Nome", true));
+            this.nomeTextBox.Location = new System.Drawing.Point(12, 116);
+            this.nomeTextBox.Name = "nomeTextBox";
+            this.nomeTextBox.Size = new System.Drawing.Size(421, 22);
+            this.nomeTextBox.TabIndex = 9;
+            // 
+            // nomeUsuarioLabel
+            // 
+            nomeUsuarioLabel.AutoSize = true;
+            nomeUsuarioLabel.Location = new System.Drawing.Point(12, 165);
+            nomeUsuarioLabel.Name = "nomeUsuarioLabel";
+            nomeUsuarioLabel.Size = new System.Drawing.Size(97, 16);
+            nomeUsuarioLabel.TabIndex = 9;
+            nomeUsuarioLabel.Text = "Nome Usuario:";
+            // 
+            // nomeUsuarioTextBox
+            // 
+            this.nomeUsuarioTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.usuarioBindingSource, "NomeUsuario", true));
+            this.nomeUsuarioTextBox.Location = new System.Drawing.Point(15, 184);
+            this.nomeUsuarioTextBox.Name = "nomeUsuarioTextBox";
+            this.nomeUsuarioTextBox.Size = new System.Drawing.Size(418, 22);
+            this.nomeUsuarioTextBox.TabIndex = 10;
+            // 
+            // senhaLabel
+            // 
+            senhaLabel.AutoSize = true;
+            senhaLabel.Location = new System.Drawing.Point(436, 165);
+            senhaLabel.Name = "senhaLabel";
+            senhaLabel.Size = new System.Drawing.Size(49, 16);
+            senhaLabel.TabIndex = 10;
+            senhaLabel.Text = "Senha:";
+            // 
+            // senhaTextBox
+            // 
+            this.senhaTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.usuarioBindingSource, "Senha", true));
+            this.senhaTextBox.Location = new System.Drawing.Point(439, 184);
+            this.senhaTextBox.Name = "senhaTextBox";
+            this.senhaTextBox.PasswordChar = '*';
+            this.senhaTextBox.Size = new System.Drawing.Size(194, 22);
+            this.senhaTextBox.TabIndex = 11;
+            // 
+            // emailLabel
+            // 
+            emailLabel.AutoSize = true;
+            emailLabel.Location = new System.Drawing.Point(436, 97);
+            emailLabel.Name = "emailLabel";
+            emailLabel.Size = new System.Drawing.Size(44, 16);
+            emailLabel.TabIndex = 11;
+            emailLabel.Text = "Email:";
+            // 
+            // emailTextBox
+            // 
+            this.emailTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.usuarioBindingSource, "Email", true));
+            this.emailTextBox.Location = new System.Drawing.Point(439, 116);
+            this.emailTextBox.Name = "emailTextBox";
+            this.emailTextBox.Size = new System.Drawing.Size(375, 22);
+            this.emailTextBox.TabIndex = 12;
+            // 
+            // cPFLabel
+            // 
+            cPFLabel.AutoSize = true;
+            cPFLabel.Location = new System.Drawing.Point(817, 97);
+            cPFLabel.Name = "cPFLabel";
+            cPFLabel.Size = new System.Drawing.Size(36, 16);
+            cPFLabel.TabIndex = 12;
+            cPFLabel.Text = "CPF:";
+            // 
+            // cPFTextBox
+            // 
+            this.cPFTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.usuarioBindingSource, "CPF", true));
+            this.cPFTextBox.Location = new System.Drawing.Point(820, 116);
+            this.cPFTextBox.Name = "cPFTextBox";
+            this.cPFTextBox.Size = new System.Drawing.Size(242, 22);
+            this.cPFTextBox.TabIndex = 13;
+            // 
+            // confirmacaoSenhatextBox
+            // 
+            this.confirmacaoSenhatextBox.Location = new System.Drawing.Point(639, 183);
+            this.confirmacaoSenhatextBox.Name = "confirmacaoSenhatextBox";
+            this.confirmacaoSenhatextBox.PasswordChar = '*';
+            this.confirmacaoSenhatextBox.Size = new System.Drawing.Size(214, 22);
+            this.confirmacaoSenhatextBox.TabIndex = 14;
+            // 
+            // ativoCheckBox
+            // 
+            this.ativoCheckBox.AutoSize = true;
+            this.ativoCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("CheckState", this.usuarioBindingSource, "Ativo", true));
+            this.ativoCheckBox.Location = new System.Drawing.Point(859, 184);
+            this.ativoCheckBox.Name = "ativoCheckBox";
+            this.ativoCheckBox.Size = new System.Drawing.Size(59, 20);
+            this.ativoCheckBox.TabIndex = 15;
+            this.ativoCheckBox.Text = "Ativo";
+            this.ativoCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // confirmacaoSenhaLabel
+            // 
+            this.confirmacaoSenhaLabel.AutoSize = true;
+            this.confirmacaoSenhaLabel.Location = new System.Drawing.Point(639, 164);
+            this.confirmacaoSenhaLabel.Name = "confirmacaoSenhaLabel";
+            this.confirmacaoSenhaLabel.Size = new System.Drawing.Size(144, 16);
+            this.confirmacaoSenhaLabel.TabIndex = 16;
+            this.confirmacaoSenhaLabel.Text = "Confirmação de Senha";
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(61, 127);
+            this.label2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(0, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(113, 16);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Nome de Usuário";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(61, 162);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(33, 16);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "CPF";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(61, 198);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(45, 16);
-            this.label4.TabIndex = 3;
-            this.label4.Text = "E-mail";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(61, 235);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(46, 16);
-            this.label5.TabIndex = 4;
-            this.label5.Text = "Senha";
-            // 
-            // maskedTextBoxCPF
-            // 
-            this.maskedTextBoxCPF.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.maskedTextBoxCPF.Location = new System.Drawing.Point(189, 159);
-            this.maskedTextBoxCPF.Name = "maskedTextBoxCPF";
-            this.maskedTextBoxCPF.Size = new System.Drawing.Size(285, 22);
-            this.maskedTextBoxCPF.TabIndex = 5;
-            // 
-            // textNome
-            // 
-            this.textNome.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textNome.Location = new System.Drawing.Point(189, 86);
-            this.textNome.Name = "textNome";
-            this.textNome.Size = new System.Drawing.Size(376, 22);
-            this.textNome.TabIndex = 6;
-            // 
-            // textNomeUsuario
-            // 
-            this.textNomeUsuario.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textNomeUsuario.Location = new System.Drawing.Point(189, 124);
-            this.textNomeUsuario.Name = "textNomeUsuario";
-            this.textNomeUsuario.Size = new System.Drawing.Size(163, 22);
-            this.textNomeUsuario.TabIndex = 6;
-            // 
-            // textBoxEmail
-            // 
-            this.textBoxEmail.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxEmail.Location = new System.Drawing.Point(189, 198);
-            this.textBoxEmail.Name = "textBoxEmail";
-            this.textBoxEmail.Size = new System.Drawing.Size(285, 22);
-            this.textBoxEmail.TabIndex = 6;
-            // 
-            // textSenha
-            // 
-            this.textSenha.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textSenha.Location = new System.Drawing.Point(189, 235);
-            this.textSenha.Name = "textSenha";
-            this.textSenha.Size = new System.Drawing.Size(285, 22);
-            this.textSenha.TabIndex = 6;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(64, 308);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 7;
-            this.button1.Text = "Incluir";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(164, 308);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 7;
-            this.button2.Text = "Alterar";
-            this.button2.UseVisualStyleBackColor = true;
-            // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(259, 308);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
-            this.button3.TabIndex = 7;
-            this.button3.Text = "Excluir";
-            this.button3.UseVisualStyleBackColor = true;
-            // 
-            // button4
-            // 
-            this.button4.Location = new System.Drawing.Point(490, 308);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 23);
-            this.button4.TabIndex = 7;
-            this.button4.Text = "Fechar";
-            this.button4.UseVisualStyleBackColor = true;
+            this.label2.Size = new System.Drawing.Size(1090, 46);
+            this.label2.TabIndex = 16;
+            this.label2.Text = "Cadastro de usuário";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // FormCadastroUsuario
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.button4);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.textSenha);
-            this.Controls.Add(this.textBoxEmail);
-            this.Controls.Add(this.textNomeUsuario);
-            this.Controls.Add(this.textNome);
-            this.Controls.Add(this.maskedTextBoxCPF);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
+            this.ClientSize = new System.Drawing.Size(1090, 387);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.confirmacaoSenhaLabel);
+            this.Controls.Add(this.ativoCheckBox);
+            this.Controls.Add(this.confirmacaoSenhatextBox);
+            this.Controls.Add(cPFLabel);
+            this.Controls.Add(this.cPFTextBox);
+            this.Controls.Add(emailLabel);
+            this.Controls.Add(this.emailTextBox);
+            this.Controls.Add(senhaLabel);
+            this.Controls.Add(this.senhaTextBox);
+            this.Controls.Add(nomeUsuarioLabel);
+            this.Controls.Add(this.nomeUsuarioTextBox);
+            this.Controls.Add(nomeLabel);
+            this.Controls.Add(this.nomeTextBox);
+            this.Controls.Add(this.buttonCancelar);
+            this.Controls.Add(this.buttonSalvar);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "FormCadastroUsuario";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Cadastro de Usuários";
+            this.Load += new System.EventHandler(this.FormCadastroUsuario_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.usuarioBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button buttonSalvar;
+        private System.Windows.Forms.Button buttonCancelar;
+        private System.Windows.Forms.BindingSource usuarioBindingSource;
+        private System.Windows.Forms.TextBox nomeTextBox;
+        private System.Windows.Forms.TextBox nomeUsuarioTextBox;
+        private System.Windows.Forms.TextBox senhaTextBox;
+        private System.Windows.Forms.TextBox emailTextBox;
+        private System.Windows.Forms.TextBox cPFTextBox;
+        private System.Windows.Forms.TextBox confirmacaoSenhatextBox;
+        private System.Windows.Forms.CheckBox ativoCheckBox;
+        private System.Windows.Forms.Label confirmacaoSenhaLabel;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.MaskedTextBox maskedTextBoxCPF;
-        private System.Windows.Forms.TextBox textNome;
-        private System.Windows.Forms.TextBox textNomeUsuario;
-        private System.Windows.Forms.TextBox textBoxEmail;
-        private System.Windows.Forms.TextBox textSenha;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button4;
     }
 }
