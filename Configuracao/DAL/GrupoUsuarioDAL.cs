@@ -84,19 +84,21 @@ namespace DAL
                 cn.Close();
             }
         }
-        public GrupoUsuario BuscarPorIdGrupo(int _id)
+        public List<GrupoUsuario> BuscarPorIdGrupo(int _idGrupo)
         {
+            List<GrupoUsuario> listaGruposUsuario = new List<GrupoUsuario>();
+            GrupoUsuario grupoUsuario = new GrupoUsuario();
+
             SqlConnection cn = new SqlConnection();
-            GrupoUsuario grupoUsuario = null;
+            SqlCommand cmd = new SqlCommand();
 
             try
             {
                 cn.ConnectionString = Conexao.StringDeConexao;
-                SqlCommand cmd = new SqlCommand();
                 cmd.Connection = cn;
-                cmd.CommandText = @"SELECT * FROM GrupoUsuario WHERE ID = @ID";
+                cmd.CommandText = @"SELECT TOP 100 ID, NomeGrupoUsuario FROM GrupoUsuario WHERE ID = @ID";
                 cmd.CommandType = System.Data.CommandType.Text;
-                cmd.Parameters.AddWithValue("@ID", _id);
+                cmd.Parameters.AddWithValue("@ID", _idGrupo);
 
                 cn.Open();
 
@@ -107,9 +109,10 @@ namespace DAL
                     grupoUsuario = new GrupoUsuario();
                     grupoUsuario.IdGrupoUser = Convert.ToInt32(dr["ID"]);
                     grupoUsuario.NomeGrupo = dr["NomeGrupo"].ToString();
+                    listaGruposUsuario.Add(grupoUsuario);
                 }
 
-                return grupoUsuario;
+                return listaGruposUsuario;
             }
             catch (Exception ex)
             {
@@ -123,7 +126,7 @@ namespace DAL
         public List<GrupoUsuario> ExibirTodosGrupos()
         {
             SqlConnection cn = new SqlConnection();
-            List<GrupoUsuario> listaGrupoUsuarios = new List<GrupoUsuario>();
+            List<GrupoUsuario> listaGruposUsuario = new List<GrupoUsuario>();
 
             try
             {
@@ -142,10 +145,10 @@ namespace DAL
                     GrupoUsuario grupoUsuario = new GrupoUsuario();
                     grupoUsuario.IdGrupoUser = Convert.ToInt32(dr["ID"]);
                     grupoUsuario.NomeGrupo = dr["NomeGrupo"].ToString();
-                    listaGrupoUsuarios.Add(grupoUsuario);
+                    listaGruposUsuario.Add(grupoUsuario);
                 }
 
-                return listaGrupoUsuarios;
+                return listaGruposUsuario;
             }
             catch (Exception ex)
             {

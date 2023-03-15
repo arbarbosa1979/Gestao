@@ -1,4 +1,5 @@
 ﻿using BLL;
+using Models;
 using System;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
@@ -47,7 +48,13 @@ namespace WindowsFormsApp
         }
         private void buttonAlterar_Click(object sender, EventArgs e)
         {
+            int id = ((Usuario).usuarioBindingSource.Current).id;
 
+            using (FormCadastroUsuario frm = new FormCadastroUsuario(true, id))
+            {
+                frm.ShowDialog();
+            }
+            buttonBuscar_Click(sender, e);
         }
         private void buttonAdicionar_Click(object sender, EventArgs e)
         {

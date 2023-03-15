@@ -45,6 +45,11 @@ namespace BLL
             return usuarioDAL.BuscarPorNomeUsuario(_nomeUsuario);
 
         }
+		public Usuario BuscarPorID(int _id)
+		{
+			UsuarioDAL usuarioDAL=new UsuarioDAL();
+			return usuarioDAL.BuscarPorID(_id);
+		}
         public List<Usuario> ExibirTodosUsuarios()
         {
             UsuarioDAL usuarioDAL = new UsuarioDAL();
@@ -65,7 +70,7 @@ namespace BLL
 				throw new Exception("A senha deve ter entre 7 e 11 caracteres.");
 			
 			if (_confirmacaodeSenha != _usuario.Senha)
-				throw new Exception("A senha e a confirmação da senha não são iguais.");
+				throw new Exception("Os valores inseridos nos campos senha e confirmação da senha não são iguais.");
 
 			if (!IsValidEmail(_usuario.Email))
 				throw new Exception("O endereço de e-mail informado é inválido.");
