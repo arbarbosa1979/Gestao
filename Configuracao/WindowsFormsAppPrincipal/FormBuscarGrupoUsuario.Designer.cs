@@ -339,7 +339,7 @@
             this.buttonAdicionarPermissaoGrupo.Text = "Adicionar";
             this.buttonAdicionarPermissaoGrupo.UseVisualStyleBackColor = true;
             // 
-            // FormBuscarGrupoUsuario
+            // FormConsultarGrupoUsuario
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -355,8 +355,8 @@
             this.Controls.Add(this.grupoUsuarioDataGridView);
             this.Controls.Add(this.grupoUsuarioBindingNavigator);
             this.MinimumSize = new System.Drawing.Size(1039, 549);
-            this.Name = "FormBuscarGrupoUsuario";
-            this.Text = "FormBuscarGrupoUsuario";
+            this.Name = "FormConsultarGrupoUsuario";
+            this.Text = "Grupos de Usuários";
             ((System.ComponentModel.ISupportInitialize)(this.grupoUsuarioBindingNavigator)).EndInit();
             this.grupoUsuarioBindingNavigator.ResumeLayout(false);
             this.grupoUsuarioBindingNavigator.PerformLayout();

@@ -14,31 +14,24 @@ namespace WindowsFormsApp
         }
         private void buttonExcluir_Click(object sender, EventArgs e)
         {
-            try
+            if (usuarioBindingSource.Count <= 0)
             {
-                int id = int.Parse(textBoxId.Text);
-
-                // Cria uma instância da classe UsuarioBLL
-                UsuarioBLL usuarioBLL = new UsuarioBLL();
-
-                // Chamar o método Excluir passando a ID do usuário
-                usuarioBLL.Excluir(id);
-
-                // Mostra uma mensagem de de operação concluída com sucesso
-                MessageBox.Show("Usuário excluído com sucesso!");
-
-                // Clear the textboxes
-                textBoxNome.Text = "";
-                textBoxEmail.Text = "";
-                textBoxSenha.Text = "";
-                textBoxId.Text = "";
+                MessageBox.Show("Não existe registro para ser excluído.");
+                return;
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Erro ao excluir usuário: " + ex.Message);
-            }
+
+            if (MessageBox.Show("Deseja realmente excluir este registro?", "Atenção", MessageBoxButtons.YesNo) == DialogResult.No)
+                return;
+
+            // Chamar o método Excluir passando a ID do usuário
+            int id = ((Usuario)usuarioBindingSource.Current).IdUser;
+            new UsuarioBLL().Excluir(id);
+
+           // Mostra uma mensagem de operação concluída com sucesso
+            MessageBox.Show("Registro excluído com sucesso!");
+            buttonBuscar_Click(null, null);
         }
-      private void buttonBuscar_Click(object sender, EventArgs e)
+        private void buttonBuscar_Click(object sender, EventArgs e)
         {
             UsuarioBLL usuarioBLL = new UsuarioBLL();
             if (textBoxBuscar.Text == "")
@@ -48,7 +41,7 @@ namespace WindowsFormsApp
         }
         private void buttonAlterar_Click(object sender, EventArgs e)
         {
-            int id = ((Usuario).usuarioBindingSource.Current).id;
+            int id = ((Usuario)usuarioBindingSource.Current).IdUser;
 
             using (FormCadastroUsuario frm = new FormCadastroUsuario(true, id))
             {
@@ -67,7 +60,13 @@ namespace WindowsFormsApp
 
         private void buttonAdicionarGrupoUsuario_Click(object sender, EventArgs e)
         {
-
+            using (FormConsultarGrupoUsuario frm = new FormConsultarGrupoUsuario())
+            {
+                frm.ShowDialog();
+                UsuarioBLL usuarioBLL = new UsuarioBLL();
+                int id = ((Usuario)usuarioBindingSource.Current).IdUser;
+                usuarioBLL.AdicionarGrupo(id, frm.id);
+            }
         }
 
         private void buttonExcluirGrupoUsuario_Click(object sender, EventArgs e)
