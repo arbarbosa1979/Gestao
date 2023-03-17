@@ -73,10 +73,11 @@ namespace WindowsFormsApp
         {
             using (FormConsultarGrupoUsuario frm = new FormConsultarGrupoUsuario())
             {
-                frm.ShowDialog();
-                UsuarioBLL usuarioBLL = new UsuarioBLL();
-                int id = ((Usuario)usuarioBindingSource.Current).IdUser;
-                usuarioBLL.(id, frm.Id);
+				frm.ShowDialog();
+				UsuarioBLL usuarioBLL = new UsuarioBLL();
+				int id = ((Usuario)usuarioBindingSource.Current).IdUser;
+				usuarioBLL.RemoverGrupoUsuario(id, frm.Id);
+				AtualizarListaDeGruposDeUsuarios();
             }
         }
     }
