@@ -123,6 +123,33 @@ namespace DAL
                 cn.Close();
             }
         }
+		public void RemoverGrupoUsuario(int idUser, int idGrupoUser)
+		{
+			SqlConnection cn = new SqlConnection();
+			SqlCommand cmd = new SqlCommand();
+
+			try
+			{
+				cn.ConnectionString = Conexao.StringDeConexao;
+				cmd.Connection = cn;
+				cmd.CommandText = @"DELETE FROM UsuarioGrupoUsuario WHERE ID_USUARIO = @IdUsuario AND ID_GrupoUsuario = @IdGrupoUsuario";
+				cmd.Parameters.AddWithValue("@IdUsuario", idUser);
+				cmd.Parameters.AddWithValue("@IdGrupoUsuario", idGrupoUser);
+				cmd.CommandType = System.Data.CommandType.Text;
+
+				cn.Open();
+
+				cmd.ExecuteNonQuery();
+			}
+			catch (Exception ex)
+			{
+				throw new Exception("Ocorreu um erro ao tentar remover o usuário do grupo: " + ex.Message);
+			}
+			finally
+			{
+				cn.Close();
+			}
+		}		
         public Usuario BuscarPorNomeUsuario(string _nomeUsuario)
         {
             Usuario usuario = new Usuario();
@@ -254,9 +281,35 @@ namespace DAL
             }
         }
 
-        public bool ExisteRelacionamento(int idUser, int idGrupoUser)
-        {
-            throw new NotImplementedException();
-        }
+		public bool ExisteRelacionamento(int idUser, int idGrupoUser)
+		{
+			SqlConnection cn = new SqlConnection();
+			SqlCommand cmd = new SqlCommand();
+
+			try
+			{
+				cn.ConnectionString = Conexao.StringDeConexao;
+				cmd.Connection = cn;
+				cmd.CommandText = @"SELECT COUNT(*) FROM UsuarioGrupoUsuario WHERE ID_USUARIO = @idUser AND ID_GrupoUsuario = @idGrupoUser";
+				cmd.Parameters.AddWithValue("@idUser", idUser);
+				cmd.Parameters.AddWithValue("@idGrupoUser", idGrupoUser);
+				cmd.CommandType = System.Data.CommandType.Text;
+
+				cn.Open();
+
+				int count = Convert.ToInt32(cmd.ExecuteScalar());
+
+				return (count > 0);
+			}
+			catch (Exception ex)
+			{
+				throw new Exception("Ocorreu um erro ao tentar verificar o relacionamento do usuário com o grupo de usuário no banco: " + ex.Message);
+			}
+			finally
+			{
+				cn.Close();
+			}
+		}
+
     }
 }
