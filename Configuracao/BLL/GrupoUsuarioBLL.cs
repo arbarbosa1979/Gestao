@@ -33,7 +33,10 @@ namespace BLL
         {
             return grupoUsuarioDAL.BuscarGrupoPorNome(_nome);
         }
-
+        public GrupoUsuario BuscarPorIdGrupo(int _id)
+        {
+            return grupoUsuarioDAL.BuscarPorIdGrupo(_id);
+        }
         public List<GrupoUsuario> ExibirTodosGrupos()
         {
             return grupoUsuarioDAL.ExibirTodosGrupos();
