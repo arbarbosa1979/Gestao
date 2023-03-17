@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.buttonSelecionar = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.buttonCancelar = new System.Windows.Forms.Button();
             this.grupoUsuarioBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.grupoUsuarioDataGridView = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -50,15 +50,17 @@
             this.buttonSelecionar.TabIndex = 0;
             this.buttonSelecionar.Text = "Selecionar";
             this.buttonSelecionar.UseVisualStyleBackColor = true;
+            this.buttonSelecionar.Click += new System.EventHandler(this.buttonSelecionar_Click);
             // 
-            // button2
+            // buttonCancelar
             // 
-            this.button2.Location = new System.Drawing.Point(714, 423);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 0;
-            this.button2.Text = "Cancelar";
-            this.button2.UseVisualStyleBackColor = true;
+            this.buttonCancelar.Location = new System.Drawing.Point(714, 423);
+            this.buttonCancelar.Name = "buttonCancelar";
+            this.buttonCancelar.Size = new System.Drawing.Size(75, 23);
+            this.buttonCancelar.TabIndex = 0;
+            this.buttonCancelar.Text = "Cancelar";
+            this.buttonCancelar.UseVisualStyleBackColor = true;
+            this.buttonCancelar.Click += new System.EventHandler(this.buttonCancelar_Click);
             // 
             // grupoUsuarioBindingSource
             // 
@@ -129,7 +131,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.textBoxBuscar);
             this.Controls.Add(this.grupoUsuarioDataGridView);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.buttonCancelar);
             this.Controls.Add(this.buttonBuscar);
             this.Controls.Add(this.buttonSelecionar);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -149,7 +151,7 @@
         #endregion
 
         private System.Windows.Forms.Button buttonSelecionar;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button buttonCancelar;
         private System.Windows.Forms.BindingSource grupoUsuarioBindingSource;
         private System.Windows.Forms.DataGridView grupoUsuarioDataGridView;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
