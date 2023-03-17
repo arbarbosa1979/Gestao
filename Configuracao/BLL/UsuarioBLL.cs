@@ -36,6 +36,11 @@ namespace BLL
             UsuarioDAL usuarioDAL = new UsuarioDAL();
             usuarioDAL.Excluir(_id);
         }
+		public void AdicionarGrupoUsuario(int _idUser, int _idGrupoUser)
+		{
+			UsuarioDAL usuarioDAL = new UsuarioDAL();
+			usuarioDAL.AddGrupoUsuario(_idUser, _idGrupoUser);
+		}
         public Usuario BuscarPorNomeUsuario(string _nomeUsuario)
         {
             if (String.IsNullOrEmpty(_nomeUsuario))
@@ -48,7 +53,7 @@ namespace BLL
 		public Usuario BuscarPorID(int _id)
 		{
 			UsuarioDAL usuarioDAL=new UsuarioDAL();
-			return usuarioDAL.BuscarPorID(_id);
+			return usuarioDAL.BuscarPorId(_id);
 		}
         public List<Usuario> ExibirTodosUsuarios()
         {
