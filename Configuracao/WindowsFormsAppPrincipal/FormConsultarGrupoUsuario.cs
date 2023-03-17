@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Models;
 
 namespace WindowsFormsApp
 {
@@ -23,6 +24,20 @@ namespace WindowsFormsApp
         {
             GrupoUsuarioBLL grupoUsuarioBLL = new GrupoUsuarioBLL();
             grupoUsuarioBindingSource.DataSource = grupoUsuarioBLL.BuscarGrupoPorNome(textBoxBuscar.Text);
+        }
+
+        private void buttonSelecionar_Click(object sender, EventArgs e)
+        {
+            if (grupoUsuarioBindingSource.Count > 0)
+            {
+                Id = ((GrupoUsuario)grupoUsuarioBindingSource.Current).IdGrupoUser;
+                Close();
+            }
+        }
+
+        private void buttonCancelar_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }
