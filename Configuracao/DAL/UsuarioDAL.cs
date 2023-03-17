@@ -280,7 +280,6 @@ namespace DAL
                 cn.Close();
             }
         }
-
 		public bool ExisteRelacionamento(int idUser, int idGrupoUser)
 		{
 			SqlConnection cn = new SqlConnection();
