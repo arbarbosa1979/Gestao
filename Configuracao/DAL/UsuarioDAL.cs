@@ -98,6 +98,31 @@ namespace DAL
 				cn.Close();
 			}
 		}
+        public void AddGrupoUsuario(int idUser, int idGrupoUser)
+        {
+            SqlConnection cn = new SqlConnection();
+            try
+            {
+                cn.ConnectionString = Conexao.StringDeConexao;
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = cn;
+                cmd.CommandText = @"INSERT INTO UsuarioGrupoUsuario(ID_Usuario, ID_GrupoUsuario) VALUES (@ID_Usuario, @ID_GrupoUsuario)";
+                cmd.CommandType = System.Data.CommandType.Text;
+                cmd.Parameters.AddWithValue("@ID_Usuario", idUser);
+                cmd.Parameters.AddWithValue("@ID_GrupoUsuario", idGrupoUser);
+
+                cn.Open();
+                cmd.ExecuteScalar();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Ocorreu um erro ao tentar inserir um grupo no banco: " + ex.Message);
+            }
+            finally
+            {
+                cn.Close();
+            }
+        }
         public Usuario BuscarPorNomeUsuario(string _nomeUsuario)
         {
             Usuario usuario = new Usuario();
@@ -135,6 +160,48 @@ namespace DAL
             catch (Exception ex)
             {
                 throw new Exception("Ocorreu um erro ao tentar buscar o usuario digitado: " + ex.Message);
+            }
+            finally
+            {
+                cn.Close();
+            }
+        }
+        public Usuario BuscarPorId(int idUser)
+        {
+            SqlConnection cn = new SqlConnection();
+            SqlCommand cmd = new SqlCommand();
+            Usuario usuario = new Usuario();
+
+            try
+            {
+                cn.ConnectionString = Conexao.StringDeConexao;
+                cmd.Connection = cn;
+                cmd.CommandText = @"SELECT ID_USUARIO, NOME, NOME_USUARIO, CPF_USUARIO, EMAIL_USUARIO, ATIVO FROM USUARIO WHERE ID_USUARIO = @IdUser";
+                cmd.Parameters.AddWithValue("@ID_USUARIO", idUser);
+                cmd.CommandType = System.Data.CommandType.Text;
+
+                cn.Open();
+
+                using (SqlDataReader rd = cmd.ExecuteReader())
+                {
+                    while (rd.Read())
+                    {
+                        usuario = new Usuario();
+                        usuario.IdUser = Convert.ToInt32(rd["ID_USUARIO"]);
+                        usuario.Nome = rd["NOME"].ToString();
+                        usuario.NomeUsuario = rd["NOME_USUARIO"].ToString();
+                        usuario.CPF = rd["CPF_USUARIO"].ToString();
+                        usuario.Email = rd["EMAIL_USUARIO"].ToString();
+                        usuario.Ativo = Convert.ToBoolean(rd["ATIVO"]);
+                        GrupoUsuarioDAL grupoUsuarioDAL = new GrupoUsuarioDAL();
+                        usuario.GrupoUsuarios = grupoUsuarioDAL.BuscarPorIdGrupo(usuario.IdUser);
+                    }
+                }
+                return usuario;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Ocorreu um erro durante a busca por usuários: " + ex.Message);
             }
             finally
             {
