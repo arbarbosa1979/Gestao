@@ -65,13 +65,19 @@ namespace WindowsFormsApp
                 frm.ShowDialog();
                 UsuarioBLL usuarioBLL = new UsuarioBLL();
                 int id = ((Usuario)usuarioBindingSource.Current).IdUser;
-                usuarioBLL.AdicionarGrupo(id, frm.id);
+                usuarioBLL.AdicionarGrupoUsuario(id, frm.Id);
             }
         }
 
         private void buttonExcluirGrupoUsuario_Click(object sender, EventArgs e)
         {
-
+            using (FormConsultarGrupoUsuario frm = new FormConsultarGrupoUsuario())
+            {
+                frm.ShowDialog();
+                UsuarioBLL usuarioBLL = new UsuarioBLL();
+                int id = ((Usuario)usuarioBindingSource.Current).IdUser;
+                usuarioBLL.(id, frm.Id);
+            }
         }
     }
 }
