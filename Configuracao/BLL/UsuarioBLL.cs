@@ -38,6 +38,9 @@ namespace BLL
         }
 		public void AdicionarGrupoUsuario(int _idUser, int _idGrupoUser)
 		{
+			if (new UsuarioDAL().ExisteRelacionamento(_idUser, _idGrupoUser))
+				return;
+
 			UsuarioDAL usuarioDAL = new UsuarioDAL();
 			usuarioDAL.AddGrupoUsuario(_idUser, _idGrupoUser);
 		}

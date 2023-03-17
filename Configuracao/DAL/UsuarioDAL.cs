@@ -252,6 +252,11 @@ namespace DAL
             {
                 cn.Close();
             }
-        }		
+        }
+
+        public bool ExisteRelacionamento(int idUser, int idGrupoUser)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
