@@ -44,6 +44,18 @@ namespace BLL
 			UsuarioDAL usuarioDAL = new UsuarioDAL();
 			usuarioDAL.AddGrupoUsuario(_idUser, _idGrupoUser);
 		}
+		public void RemoverGrupoUsuario(int idUsuario, int idGrupoUsuario)
+		{
+			try
+			{
+				UsuarioDAL usuarioDAL = new UsuarioDAL();
+				usuarioDAL.RemoverGrupoUsuario(idUsuario, idGrupoUsuario);
+			}
+			catch (Exception ex)
+			{
+				throw new Exception("Ocorreu um erro ao tentar remover o usuário do grupo: " + ex.Message);
+			}
+		}
         public Usuario BuscarPorNomeUsuario(string _nomeUsuario)
         {
             if (String.IsNullOrEmpty(_nomeUsuario))
