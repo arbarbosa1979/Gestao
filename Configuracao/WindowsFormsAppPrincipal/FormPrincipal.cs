@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,6 +16,7 @@ namespace WindowsFormsApp
         public FormPrincipal()
         {
             InitializeComponent();
+            Constantes.IdUsuarioLogado = 11;
         }
         private void usuariosToolStripMenuItem_Click(object sender, EventArgs e)
         {

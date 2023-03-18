@@ -41,6 +41,10 @@ namespace WindowsFormsApp
         }
         private void buttonAlterar_Click(object sender, EventArgs e)
         {
+            if (usuarioBindingSource.Count <= 0)
+            {
+                MessageBox.Show("Não existe registro");
+            }
             int id = ((Usuario)usuarioBindingSource.Current).IdUser;
 
             using (FormCadastroUsuario frm = new FormCadastroUsuario(true, id))
@@ -63,6 +67,10 @@ namespace WindowsFormsApp
             using (FormConsultarGrupoUsuario frm = new FormConsultarGrupoUsuario())
             {
                 frm.ShowDialog();
+
+                if (frm.Id == 0)
+                    return;
+
                 UsuarioBLL usuarioBLL = new UsuarioBLL();
                 int id = ((Usuario)usuarioBindingSource.Current).IdUser;
                 usuarioBLL.AdicionarGrupoUsuario(id, frm.Id);
@@ -71,13 +79,22 @@ namespace WindowsFormsApp
 
         private void buttonExcluirGrupoUsuario_Click(object sender, EventArgs e)
         {
-            using (FormConsultarGrupoUsuario frm = new FormConsultarGrupoUsuario())
+            try
             {
-				frm.ShowDialog();
-				UsuarioBLL usuarioBLL = new UsuarioBLL();
-				int id = ((Usuario)usuarioBindingSource.Current).IdUser;
-				usuarioBLL.RemoverGrupoUsuario(id, frm.Id);
-				AtualizarListaDeGruposDeUsuarios();
+                if (usuarioBindingSource.Count == 0 || grupoUsuariosBindingSource.Count == 0)
+                {
+                    MessageBox.Show("Não existe grupo de usuário para ser excluído.");
+                    return;
+                }
+                
+			    int idUsuario = ((Usuario)usuarioBindingSource.Current).IdUser;
+                int idGrupoUsuario = ((GrupoUsuario)grupoUsuariosBindingSource.Current).IdGrupoUser;
+			    new UsuarioBLL().RemoverGrupoUsuario(idUsuario, idGrupoUsuario);
+                grupoUsuariosBindingSource.RemoveCurrent();
+            }
+            catch (System.Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
     }

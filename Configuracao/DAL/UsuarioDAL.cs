@@ -97,59 +97,7 @@ namespace DAL
 			{
 				cn.Close();
 			}
-		}
-        public void AddGrupoUsuario(int idUser, int idGrupoUser)
-        {
-            SqlConnection cn = new SqlConnection();
-            try
-            {
-                cn.ConnectionString = Conexao.StringDeConexao;
-                SqlCommand cmd = new SqlCommand();
-                cmd.Connection = cn;
-                cmd.CommandText = @"INSERT INTO UsuarioGrupoUsuario(ID_Usuario, ID_GrupoUsuario) VALUES (@ID_Usuario, @ID_GrupoUsuario)";
-                cmd.CommandType = System.Data.CommandType.Text;
-                cmd.Parameters.AddWithValue("@ID_Usuario", idUser);
-                cmd.Parameters.AddWithValue("@ID_GrupoUsuario", idGrupoUser);
-
-                cn.Open();
-                cmd.ExecuteScalar();
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Ocorreu um erro ao tentar inserir um grupo no banco: " + ex.Message);
-            }
-            finally
-            {
-                cn.Close();
-            }
-        }
-		public void RemoverGrupoUsuario(int idUser, int idGrupoUser)
-		{
-			SqlConnection cn = new SqlConnection();
-			SqlCommand cmd = new SqlCommand();
-
-			try
-			{
-				cn.ConnectionString = Conexao.StringDeConexao;
-				cmd.Connection = cn;
-				cmd.CommandText = @"DELETE FROM UsuarioGrupoUsuario WHERE ID_USUARIO = @IdUsuario AND ID_GrupoUsuario = @IdGrupoUsuario";
-				cmd.Parameters.AddWithValue("@IdUsuario", idUser);
-				cmd.Parameters.AddWithValue("@IdGrupoUsuario", idGrupoUser);
-				cmd.CommandType = System.Data.CommandType.Text;
-
-				cn.Open();
-
-				cmd.ExecuteNonQuery();
-			}
-			catch (Exception ex)
-			{
-				throw new Exception("Ocorreu um erro ao tentar remover o usuário do grupo: " + ex.Message);
-			}
-			finally
-			{
-				cn.Close();
-			}
-		}		
+		}	
         public Usuario BuscarPorNomeUsuario(string _nomeUsuario)
         {
             Usuario usuario = new Usuario();
@@ -280,7 +228,59 @@ namespace DAL
                 cn.Close();
             }
         }
-		public bool ExisteRelacionamento(int idUser, int idGrupoUser)
+        public void AddGrupoUsuario(int idUser, int idGrupoUser)
+        {
+            SqlConnection cn = new SqlConnection();
+            try
+            {
+                cn.ConnectionString = Conexao.StringDeConexao;
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = cn;
+                cmd.CommandText = @"INSERT INTO UsuarioGrupoUsuario(ID_Usuario, ID_GrupoUsuario) VALUES (@ID_Usuario, @ID_GrupoUsuario)";
+                cmd.CommandType = System.Data.CommandType.Text;
+                cmd.Parameters.AddWithValue("@ID_Usuario", idUser);
+                cmd.Parameters.AddWithValue("@ID_GrupoUsuario", idGrupoUser);
+
+                cn.Open();
+                cmd.ExecuteScalar();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Ocorreu um erro ao tentar inserir o usuário neste grupo: " + ex.Message);
+            }
+            finally
+            {
+                cn.Close();
+            }
+        }
+        public void RemoverGrupoUsuario(int idUser, int idGrupoUser)
+        {
+            SqlConnection cn = new SqlConnection();
+            SqlCommand cmd = new SqlCommand();
+
+            try
+            {
+                cn.ConnectionString = Conexao.StringDeConexao;
+                cmd.Connection = cn;
+                cmd.CommandText = @"DELETE FROM UsuarioGrupoUsuario WHERE ID_USUARIO = @IdUsuario AND ID_GrupoUsuario = @IdGrupoUsuario";
+                cmd.Parameters.AddWithValue("@IdUsuario", idUser);
+                cmd.Parameters.AddWithValue("@IdGrupoUsuario", idGrupoUser);
+                cmd.CommandType = System.Data.CommandType.Text;
+
+                cn.Open();
+
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Ocorreu um erro ao tentar remover o usuário deste grupo: " + ex.Message);
+            }
+            finally
+            {
+                cn.Close();
+            }
+        }
+        public bool ExisteRelacionamento(int idUser, int idGrupoUser)
 		{
 			SqlConnection cn = new SqlConnection();
 			SqlCommand cmd = new SqlCommand();
@@ -309,6 +309,43 @@ namespace DAL
 				cn.Close();
 			}
 		}
+        public bool ValidarPermissao(int _idUsuario, int _idPermissao)
+        {
+            SqlConnection cn = new SqlConnection();
+            SqlCommand cmd = new SqlCommand();
 
+            try
+            {
+                cn.ConnectionString = Conexao.StringDeConexao;
+                cmd.Connection = cn;
+                cmd.CommandText = @"SELECT TOP 1 1 AS RESULTADO FROM USUARIOGRUPOUSUARIO
+                                    INNER JOIN PERMISSAOGRUPOUSUARIO
+                                    ON USUARIOGRUPOUSUARIO.ID_GrupoUsuario = GrupoUsuario.ID
+                                    WHERE USUARIOGRUPOUSUARIO.ID_Usuario = 11 
+                                    AND PERMISSAOGRUPOUSUARIO.ID_PERMISSAO = 6";
+                cmd.Parameters.AddWithValue("@ID_USUARIO", _idUsuario);
+                cmd.Parameters.AddWithValue("@ID_PERMISSAO", _idPermissao);
+                cmd.CommandType = System.Data.CommandType.Text;
+
+                cn.Open();
+
+                using (SqlDataReader rd = cmd.ExecuteReader())
+                {
+                    if (rd.Read())
+                    {
+                        return true;
+                    }
+                }
+                return usuario;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Ocorreu um erro ao tentar validar a permissão do usuário." + ex.Message);
+            }
+            finally
+            {
+                cn.Close();
+            }
+        }
     }
 }

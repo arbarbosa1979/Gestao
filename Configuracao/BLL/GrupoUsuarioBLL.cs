@@ -33,7 +33,7 @@ namespace BLL
         {
             return grupoUsuarioDAL.BuscarGrupoPorNome(_nome);
         }
-        public GrupoUsuario BuscarPorIdGrupo(int _id)
+        public List<GrupoUsuario> BuscarPorIdGrupo(int _id)
         {
             return grupoUsuarioDAL.BuscarPorIdGrupo(_id);
         }

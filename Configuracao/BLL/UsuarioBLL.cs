@@ -9,7 +9,7 @@ namespace BLL
     {
         public void Inserir(Usuario _usuario, string _confirmacaodeSenha)
         {
-            ValidarDados(_usuario, _confirmacaodeSenha);
+           ValidarDados(_usuario, _confirmacaodeSenha);
 
             Usuario usuario = new Usuario();
             usuario = BuscarPorNomeUsuario(_usuario.NomeUsuario);
@@ -36,26 +36,6 @@ namespace BLL
             UsuarioDAL usuarioDAL = new UsuarioDAL();
             usuarioDAL.Excluir(_id);
         }
-		public void AdicionarGrupoUsuario(int _idUser, int _idGrupoUser)
-		{
-			if (new UsuarioDAL().ExisteRelacionamento(_idUser, _idGrupoUser))
-				return;
-
-			UsuarioDAL usuarioDAL = new UsuarioDAL();
-			usuarioDAL.AddGrupoUsuario(_idUser, _idGrupoUser);
-		}
-		public void RemoverGrupoUsuario(int idUsuario, int idGrupoUsuario)
-		{
-			try
-			{
-				UsuarioDAL usuarioDAL = new UsuarioDAL();
-				usuarioDAL.RemoverGrupoUsuario(idUsuario, idGrupoUsuario);
-			}
-			catch (Exception ex)
-			{
-				throw new Exception("Ocorreu um erro ao tentar remover o usuário do grupo: " + ex.Message);
-			}
-		}
         public Usuario BuscarPorNomeUsuario(string _nomeUsuario)
         {
             if (String.IsNullOrEmpty(_nomeUsuario))
@@ -75,7 +55,26 @@ namespace BLL
             UsuarioDAL usuarioDAL = new UsuarioDAL();
             return usuarioDAL.ExibirTodosUsuarios();
         }
-		private void ValidarDados(Usuario _usuario, string _confirmacaodeSenha)
+        public void AdicionarGrupoUsuario(int _idUser, int _idGrupoUser)
+        {
+            if (new UsuarioDAL().ExisteRelacionamento(_idUser, _idGrupoUser))
+                return;
+
+            UsuarioDAL usuarioDAL = new UsuarioDAL();
+            usuarioDAL.AddGrupoUsuario(_idUser, _idGrupoUser);
+        }
+        public void RemoverGrupoUsuario(int idUsuario, int idGrupoUsuario)
+        {
+            try
+            {
+                new UsuarioDAL().RemoverGrupoUsuario(idUsuario, idGrupoUsuario);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Ocorreu um erro ao tentar remover o usuário do grupo: " + ex.Message);
+            }
+        }
+        private void ValidarDados(Usuario _usuario, string _confirmacaodeSenha)
 		{
 			if (_usuario.NomeUsuario?.Length <= 3 || _usuario.NomeUsuario?.Length >= 50)
 				throw new Exception("O nome de usuário deve ter mais de três caracteres.");

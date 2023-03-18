@@ -153,8 +153,6 @@ namespace DAL
                     grupoUsuario.NomeGrupo = dr["NomeGrupo"].ToString();
                     listaGruposUsuario.Add(grupoUsuario);
                 }
-
-                return listaGruposUsuario;
             }
             catch (Exception ex)
             {
@@ -164,6 +162,7 @@ namespace DAL
             {
                 cn.Close();
             }
+            return listaGruposUsuario;
         }
         public List<GrupoUsuario> ExibirTodosGrupos()
         {
