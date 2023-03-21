@@ -55,13 +55,21 @@ namespace WindowsFormsApp
         }
         private void buttonAdicionar_Click(object sender, EventArgs e)
         {
-            using (FormCadastroUsuario frm = new FormCadastroUsuario())
+            try
             {
-                frm.ShowDialog();
-            }
-            buttonBuscar_Click(sender, e);
-        }
+                new UsuarioBLL().ValidarPermissao(4);
+                buttonBuscar_Click(sender, e);
 
+                using (FormCadastroUsuario frm = new FormCadastroUsuario())
+                {
+                    frm.ShowDialog();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
         private void buttonAdicionarGrupoUsuario_Click(object sender, EventArgs e)
         {
             using (FormConsultarGrupoUsuario frm = new FormConsultarGrupoUsuario())

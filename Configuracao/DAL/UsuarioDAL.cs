@@ -318,29 +318,28 @@ namespace DAL
             {
                 cn.ConnectionString = Conexao.StringDeConexao;
                 cmd.Connection = cn;
-                cmd.CommandText = @"SELECT TOP 1 1 AS RESULTADO FROM USUARIOGRUPOUSUARIO
-                                    INNER JOIN PERMISSAOGRUPOUSUARIO
-                                    ON USUARIOGRUPOUSUARIO.ID_GrupoUsuario = GrupoUsuario.ID
-                                    WHERE USUARIOGRUPOUSUARIO.ID_Usuario = 11 
-                                    AND PERMISSAOGRUPOUSUARIO.ID_PERMISSAO = 6";
-                cmd.Parameters.AddWithValue("@ID_USUARIO", _idUsuario);
-                cmd.Parameters.AddWithValue("@ID_PERMISSAO", _idPermissao);
+                cmd.CommandText = @"SELECT TOP 1 1 AS Resultado FROM UsuarioGrupoUsuario
+                                    INNER JOIN PermissaoGrupoUsuario ON UsuarioGrupoUsuario.ID_GrupoUsuario = PermissaoGrupoUsuario.ID_GrupoUsuario
+                                    WHERE UsuarioGrupoUsuario.ID_Usuario = @IdUsario AND PermissaoGrupoUsuario.ID_Permissao = @IdPermissao";
+
                 cmd.CommandType = System.Data.CommandType.Text;
+
+                cmd.Parameters.AddWithValue("@IdUsuario", _idUsuario);
+                cmd.Parameters.AddWithValue("@IdPermissao", _idPermissao);
+
 
                 cn.Open();
 
                 using (SqlDataReader rd = cmd.ExecuteReader())
                 {
                     if (rd.Read())
-                    {
                         return true;
-                    }
                 }
-                return usuario;
+                return false;
             }
             catch (Exception ex)
             {
-                throw new Exception("Ocorreu um erro ao tentar validar a permissão do usuário." + ex.Message);
+                throw new Exception("Ocorreu um erro ao tentar validar a permissão do usuário no banco de dados." + ex.Message);
             }
             finally
             {
