@@ -82,9 +82,10 @@ namespace DAL
 				cn.ConnectionString = Conexao.StringDeConexao;
 				SqlCommand cmd = new SqlCommand();
 				cmd.Connection = cn;
-				cmd.CommandText = @"DELETE FROM USUARIO WHERE ID_USUARIO = @ID_USUARIO";
+				cmd.CommandText = @"DELETE FROM UsuarioGrupoUsuario WHERE ID_USUARIO = @ID
+                                    DELETE FROM USUARIO WHERE ID_USUARIO = @ID";
 				cmd.CommandType = System.Data.CommandType.Text;
-				cmd.Parameters.AddWithValue("@ID_USUARIO", _id);
+				cmd.Parameters.AddWithValue("@ID", _id);
 
 				cn.Open();
 				cmd.ExecuteNonQuery();

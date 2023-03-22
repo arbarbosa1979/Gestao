@@ -16,8 +16,9 @@ namespace DAL
                 cn.ConnectionString = Conexao.StringDeConexao;
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = cn;
-                cmd.CommandText = @"INSERT INTO Permissao(Descricao) VALUES (@Descricao)";
+                cmd.CommandText = @"INSERT INTO Permissao(ID, Descricao) VALUES (@IdPermissao, @Descricao)";
                 cmd.CommandType = System.Data.CommandType.Text;
+                cmd.Parameters.AddWithValue("@IdPermissao", _permissao.Id);
                 cmd.Parameters.AddWithValue("@Descricao", _permissao.Descricao);
 
                 cn.Open();
@@ -26,7 +27,7 @@ namespace DAL
             catch (Exception ex)
             {
 
-                throw new Exception("Ocorreu um erro ao tentar inserir uma descrição no banco: " + ex.Message);
+                throw new Exception("Ocorreu um erro ao tentar inserir uma permissão no banco: " + ex.Message);
             }
             finally
             {
@@ -43,7 +44,7 @@ namespace DAL
                 cn.ConnectionString = Conexao.StringDeConexao;
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = cn;
-                cmd.CommandText = "UPDATE Permissao SET Descricao = @descricao WHERE id_Permissao = @id";
+                cmd.CommandText = "UPDATE Permissao SET Descricao = @descricao WHERE ID = @id";
                 cmd.CommandType = System.Data.CommandType.Text;
                 cmd.Parameters.AddWithValue("@descricao", _permissao.Descricao);
                 cmd.Parameters.AddWithValue("@id", _permissao.Id);
@@ -56,7 +57,7 @@ namespace DAL
             }
             catch (Exception ex)
             {
-                throw new Exception("Ocorreu um erro ao tentar inserir um usuário no banco " + ex.Message);
+                throw new Exception("Ocorreu um erro ao tentar alterar uma permissão no banco " + ex.Message);
 
 
             }
@@ -74,9 +75,9 @@ namespace DAL
                 cn.ConnectionString = Conexao.StringDeConexao;
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = cn;
-                cmd.CommandText = @"DELETE FROM Permissao WHERE ID = @ID";
+                cmd.CommandText = @"DELETE FROM Permissao WHERE ID = @IdPermissao";
                 cmd.CommandType = System.Data.CommandType.Text;
-                cmd.Parameters.AddWithValue("@ID", _id);
+                cmd.Parameters.AddWithValue("@IdPermissao", _id);
 
                 cn.Open();
                 cmd.ExecuteScalar();
@@ -101,16 +102,16 @@ namespace DAL
             {
                 cn.ConnectionString = Conexao.StringDeConexao;
                 cmd.Connection = cn;
-                cmd.CommandText = "SELECT TOP 100 IdDescricao, Descricao FROM Permissao WHERE IdDescricao = @IdDescricao";
+                cmd.CommandText = "SELECT TOP 100 ID, Descricao FROM Permissao WHERE ID = @IdPermissao";
                 cmd.CommandType = System.Data.CommandType.Text;
-                cmd.Parameters.AddWithValue("@IdDescricao", _id);
+                cmd.Parameters.AddWithValue("@IdPermissao", _id);
                 cn.Open();
                 using (SqlDataReader rd = cmd.ExecuteReader())
                 {
                     while (rd.Read())
                     {
                         permissao = new Permissao();
-                        permissao.Id= Convert.ToInt32(rd["IdDescricao"]);
+                        permissao.Id= Convert.ToInt32(rd["ID"]);
                         permissao.Descricao = rd["Descricao"].ToString();
                     }
                 }
