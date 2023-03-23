@@ -1,13 +1,6 @@
 ﻿using BLL;
 using Models;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace WindowsFormsApp
@@ -32,7 +25,7 @@ namespace WindowsFormsApp
                 PermissaoBLL permissaoBLL = new PermissaoBLL();
                 if (!alterar)
                 {
-                    permissaoBLL.Inserir(descricaoTextBox.Text, Convert.ToInt32(idTextBox.Text));
+                    permissaoBLL.Inserir(Convert.ToInt32(idTextBox.Text), descricaoTextBox.Text);
                     MessageBox.Show("Permissão cadastrada com sucesso!");
                     Close();
                 }
@@ -48,6 +41,17 @@ namespace WindowsFormsApp
 
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private void buttonCancelar_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void FormCadastroPermissao_Load(object sender, EventArgs e)
+        {
+            if (!alterar)
+                permissaoBindingSource.AddNew();
         }
     }
 }

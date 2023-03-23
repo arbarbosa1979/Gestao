@@ -46,6 +46,16 @@ namespace BLL
         {
             grupoUsuarioDAL.Excluir(id);
         }
+        public void RemoverVinculoGrupoPermissao(int _id_grupo, int _id_permissao)
+        {
+            GrupoUsuarioDAL grupousuarioDAL = new GrupoUsuarioDAL();
+            grupousuarioDAL.ExcluirRelacioGrupoPermissao(_id_grupo, _id_permissao);
+        }
+        public void VincularPermissaoGrupo(int _idGrupo, int _idPemrissao)
+        {
+            GrupoUsuarioDAL grupousuarioDAL = new GrupoUsuarioDAL();
+            grupousuarioDAL.VincularPermissaoGrupo(_idGrupo, _idPemrissao);
+        }
     }
 }
 

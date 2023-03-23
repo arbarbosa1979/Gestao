@@ -200,5 +200,101 @@ namespace DAL
                 cn.Close();
             }
         }
+        public void ExcluirRelacioGrupoPermissao(int _idgrupo, int _idpermissao)
+        {
+            SqlConnection cn = new SqlConnection();
+            try
+            {
+
+                cn.ConnectionString = Conexao.StringDeConexao;
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = cn;
+                cmd.CommandText = "DELETE FROM PermissaoGrupoUsuario WHERE ID_GrupoUsuario = @idgrupo AND ID_Permissao = @idpermissao";
+                cmd.CommandType = System.Data.CommandType.Text;
+                cmd.Parameters.AddWithValue("@idgrupo", _idgrupo);
+                cmd.Parameters.AddWithValue("@idpermissao", _idpermissao);
+
+
+                cn.Open();
+                cmd.ExecuteScalar();
+
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Ocorreu um erro ao tentar inserir um relacionamento no banco " + ex.Message);
+
+
+            }
+            finally
+            {
+                cn.Close();
+            }
+        }
+        public bool ExisteRelacion_GrupoUsuario(GrupoUsuario _idGrupo)
+        {
+            GrupoUsuario grupoUsuario = new GrupoUsuario();
+            SqlConnection cn = new SqlConnection();
+            SqlCommand cmd = new SqlCommand();
+            try
+            {
+                cn.ConnectionString = Conexao.StringDeConexao;
+                cmd.Connection = cn;
+                cmd.CommandText = @"SELECT 1 AS retorno FROM UsuarioGrupoUsuario WHERE ID_GrupoUsuario = @idGrupo ";
+                cmd.CommandType = System.Data.CommandType.Text;
+                cmd.Parameters.AddWithValue("@idGrupo", _idGrupo.IdGrupoUser);
+                cn.Open();
+                using (SqlDataReader rd = cmd.ExecuteReader())
+                {
+                    if (rd.Read())
+                    {
+                        return true;
+                    }
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Ocorreu um erro ao tentar buscar um relacionamento no banco: " + ex.Message);
+            }
+            finally
+            {
+                cn.Close();
+            }
+        }
+        public void VincularPermissaoGrupo(int _idPermissao, int _idGrupo)
+        {
+            SqlConnection cn = new SqlConnection();
+            try
+            {
+
+                cn.ConnectionString = Conexao.StringDeConexao;
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = cn;
+                cmd.CommandText = "INSERT INTO PermissaoGrupoUsuario(ID_Permissao, ID_GrupoUsuario)" +
+                                  "VALUES (@idPermissao, @idGrupo)";
+                cmd.CommandType = System.Data.CommandType.Text;
+                cmd.Parameters.AddWithValue("@idPermissao", _idPermissao);
+                cmd.Parameters.AddWithValue("@idGrupo", _idGrupo);
+
+
+
+                cn.Open();
+                cmd.ExecuteScalar();
+
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Ocorreu um erro ao tentar vincular uma permissão no banco " + ex.Message);
+
+
+            }
+            finally
+            {
+                cn.Close();
+            }
+
+        }
     }
 }

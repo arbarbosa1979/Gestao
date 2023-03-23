@@ -7,7 +7,7 @@ namespace DAL
 {
     public class PermissaoDAL
     {
-        public void Inserir(Permissao _permissao)
+        public void Inserir(int _id, string _permissao)
         {
             SqlConnection cn = new SqlConnection();
 
@@ -18,8 +18,8 @@ namespace DAL
                 cmd.Connection = cn;
                 cmd.CommandText = @"INSERT INTO Permissao(ID, Descricao) VALUES (@IdPermissao, @Descricao)";
                 cmd.CommandType = System.Data.CommandType.Text;
-                cmd.Parameters.AddWithValue("@IdPermissao", _permissao.ID);
-                cmd.Parameters.AddWithValue("@Descricao", _permissao.Descricao);
+                cmd.Parameters.AddWithValue("@IdPermissao", _id);
+                cmd.Parameters.AddWithValue("@Descricao", _permissao);
 
                 cn.Open();
                 cmd.ExecuteScalar();
@@ -33,7 +33,6 @@ namespace DAL
             {
                 cn.Close();
             }
-
         }
         public void Alterar(Permissao _permissao)
         {
@@ -110,10 +109,10 @@ namespace DAL
                     while (rd.Read())
                     {
                         permissao = new Permissao();
-                        permissao.Id = Convert.ToInt32(rd["id_Permissao"]);
+                        permissao.ID = Convert.ToInt32(rd["id_Permissao"]);
                         permissao.Descricao = rd["Descricao"].ToString();
                         GrupoUsuarioDAL grupoUsuarioDAL = new GrupoUsuarioDAL();
-                        permissao.GrupoUsuarios = grupoUsuarioDAL.BuscarPorIdGrupo(permissao.Id);
+                        permissao.GrupoUsuarios = grupoUsuarioDAL.BuscarPorIdGrupo(permissao.ID);
                         permissoes.Add(permissao);
                     }
                 }
@@ -164,7 +163,7 @@ namespace DAL
             }
             return permissao;
         }
-        public List<Permissao> ExibirTodasPermissoes(int _id)
+        public List<Permissao> ExibirTodasPermissoes(                                                                                                                                               )
         {
             List<Permissao> permissoes = new List<Permissao>();
             Permissao permissao;
@@ -175,9 +174,8 @@ namespace DAL
             {
                 cn.ConnectionString = Conexao.StringDeConexao;
                 cmd.Connection = cn;
-                cmd.CommandText = "SELECT ID, Descricao FROM Permissao WHERE ID = @id";
+                cmd.CommandText = "SELECT ID, Descricao FROM Permissao";
                 cmd.CommandType = System.Data.CommandType.Text;
-                cmd.Parameters.AddWithValue("@id", _id);
                 cn.Open();
                 using (SqlDataReader rd = cmd.ExecuteReader())
                 {
@@ -187,11 +185,9 @@ namespace DAL
                         permissao.ID = Convert.ToInt32(rd["ID"]);
                         permissao.Descricao = rd["Descricao"].ToString();
                         GrupoUsuarioDAL grupoUsuarioDAL = new GrupoUsuarioDAL();
-                        permissao.GrupoUsuarios = grupoUsuarioDAL.(permissao.ID);
                         permissoes.Add(permissao);
                     }
                 }
-
                 return permissoes;
             }
             catch (Exception ex)
