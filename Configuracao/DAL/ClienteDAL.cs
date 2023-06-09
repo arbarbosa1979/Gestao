@@ -75,7 +75,7 @@ namespace DAL
             }
             catch (Exception ex)
             {
-                throw new Exception("Ocorreu um erro ao tentar buscar clientes por Id no banco de dados.", ex) { Data = { { "Id", 18} }};
+                throw new Exception("Ocorreu um erro ao tentar buscar clientes por Id no banco de dados.", ex) { Data = { { "Id", 18 } } };
             }
             finally
             {
@@ -254,9 +254,9 @@ namespace DAL
             {
                 throw new Exception("Ocorreu um erro ao tentar excluir um cliente do banco de dados.", ex) { Data = { { "Id", 21 } } };
             }
-            finally 
-            { 
-                cn.Close(); }
+            finally
+            {
+                cn.Close(); 
             }
         }
     }
