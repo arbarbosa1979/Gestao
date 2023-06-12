@@ -49,5 +49,22 @@ namespace WindowsFormsAppPrincipal
                 MessageBox.Show(ex.Message);
             }
         }
+
+        private void buttonInserir_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                using (FormCadastroCliente frm = new FormCadastroCliente())
+                {
+                    frm.ShowDialog();
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message);
+            }
+        }
     }
 }
