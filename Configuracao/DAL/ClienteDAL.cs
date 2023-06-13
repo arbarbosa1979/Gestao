@@ -211,9 +211,12 @@ namespace DAL
             try
             {
                 SqlCommand cmd = cn.CreateCommand();
-                cmd.CommandText = @"UPDATE Cliente SET Nome = @Nome, CPF = @CPF, RG = @RG, Email = @Email, Fone = @Fone WHERE Id = @Id";
+                cmd.CommandText = @"UPDATE Cliente SET Nome = @Nome, CPF = @CPF, 
+                                    RG = @RG, Email = @Email, Fone = @Fone 
+                                    WHERE Id = @Id";
                 cmd.CommandType = System.Data.CommandType.Text;
 
+                cmd.Parameters.AddWithValue("@Id", _cliente.Id);
                 cmd.Parameters.AddWithValue("@Nome", _cliente.Nome);
                 cmd.Parameters.AddWithValue("@CPF", _cliente.CPF);
                 cmd.Parameters.AddWithValue("@RG", _cliente.RG);

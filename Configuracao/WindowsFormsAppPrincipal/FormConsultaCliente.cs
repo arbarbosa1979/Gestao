@@ -95,5 +95,10 @@ namespace WindowsFormsAppPrincipal
                 MessageBox.Show(ex.Message);
             }
         }
+
+        private void textBoxBuscar_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
