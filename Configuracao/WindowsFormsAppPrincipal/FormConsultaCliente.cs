@@ -14,11 +14,10 @@ namespace WindowsFormsAppPrincipal
 {
     public partial class FormConsultaCliente : Form
     {
-        public FormConsultaCliente()
+        public FormConsultaCliente(int id = 0)
         {
             InitializeComponent();
         }
-
         private void buttonBuscar_Click(object sender, EventArgs e)
         {
             try
@@ -41,11 +40,18 @@ namespace WindowsFormsAppPrincipal
                     return;
                 }
 
-                new ClienteBLL().Excluir(((Cliente)clienteBindingSource.Current).Id);
+                if (MessageBox.Show("Deseja realmente excluir este registro?",
+                    "Atenção", MessageBoxButtons.YesNo) == DialogResult.No)
+                    return;
+
+                int id = ((Cliente)clienteBindingSource.Current).Id;
+                new ClienteBLL().Excluir(id);
+                clienteBindingSource.RemoveCurrent();
+
+                MessageBox.Show("Registro excluído com sucesso!");
             }
             catch (Exception ex)
             {
-
                 MessageBox.Show(ex.Message);
             }
         }
@@ -63,6 +69,29 @@ namespace WindowsFormsAppPrincipal
             catch (Exception ex)
             {
 
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void buttonAlterar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if(clienteBindingSource.Count == 0)
+                {
+                    MessageBox.Show("Não existe nenhum registro selecionado para alterar.");
+                    return;
+                }
+                int id = ((Cliente)clienteBindingSource.Current).Id;
+
+                using (FormCadastroCliente frm = new FormCadastroCliente(id))
+                {
+                    frm.ShowDialog();
+                }
+                buttonBuscar_Click(null, null);
+            }
+            catch (Exception ex)
+            {
                 MessageBox.Show(ex.Message);
             }
         }
