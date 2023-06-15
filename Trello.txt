@@ -1,0 +1,38 @@
+\\LAB-02-00\Dev\CSHARP
+
+Criar a tabela Fornecedor no banco de dados
+			
+			   A tabela deve ter as seguintes colunas:
+				Id: chave primária do tipo inteiro e auto incremento
+				Nome: Tipo texto de 150 caractéres
+				Fone: Tipo texto de 15 caractéres
+				Email: Tipo texto de 200 caractéres
+				Site: Tipo texto de 250 caractéres
+	
+
+Criar a classe Fornecedor na Models
+Criar a classe FornecedorDAL
+Criar na FornecedorDAL o método Inserir
+Criar na FornecedorDAL o método BuscarTodos
+Criar na FornecedorDAL o método BuscarPorId
+Criar na FornecedorDAL o método BuscarPorNome
+Criar na FornecedorDAL o método BuscarSite
+Criar na FornecedorDAL o método Alterar
+Criar na FornecedorDAL o método Excluir
+Criar a classe FornecedorBLL
+Criar na FornecedorBLL o método Inserir
+Criar na FornecedorBLL o método BuscarTodos
+Criar na FornecedorBLL o método BuscarPorId
+Criar na FornecedorBLL o método BuscarPorNome
+Criar na FornecedorBLL o método BuscarSite
+Criar na FornecedorBLL o método Alterar
+Criar na FornecedorBLL o método Excluir
+Criar a tela FormConsultaFornecedor
+				Deve ter as mesmas características do FormConsultaCliente
+No FormConsultaFornecedor implementar as buscas do buttonBuscar
+No FormConsultaFornecedor implementar o código do buttonExcluir
+Criar a tela FormCadastroFornecedor
+				Deve ter as mesmas características do FormCadastroCliente
+No FormCadastroFornecedor implementar o código do buttonSalvar
+No FormConsultaFornecedor implementar o código do buttonIncluir
+No FormConsultaFornecedor implementar o código do buttonAlterar

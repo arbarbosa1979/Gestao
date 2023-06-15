@@ -143,7 +143,7 @@ namespace DAL
 
                 using (SqlDataReader rd = cmd.ExecuteReader())
                 {
-                    while (rd.Read())
+                    if (rd.Read())
                     {
                         cliente.Id = (int)rd["Id"];
                         cliente.Nome = rd["Nome"].ToString();
@@ -183,7 +183,7 @@ namespace DAL
 
                 using (SqlDataReader rd = cmd.ExecuteReader())
                 {
-                    while (rd.Read())
+                    if (rd.Read())
                     {
                         cliente.Id = (int)rd["Id"];
                         cliente.Nome = rd["Nome"].ToString();
