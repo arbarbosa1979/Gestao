@@ -2,29 +2,24 @@
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DAL
 {
     public class FornecedorDAL
     {
-        public void Inserir(Fornecedor _fornecedor)
+        public void Inserir(Fornecedor fornecedor)
         {
             SqlConnection cn = new SqlConnection(Conexao.StringDeConexao);
             try
             {
                 SqlCommand cmd = cn.CreateCommand();
-                cmd.CommandText = @"INSERT INTO Fornecedor(NomeSocial, RazaoSocial, CNPJ, IncricaoEstadual, Email, Fone) VALUES(@NomeSocial, @RazaoSocial, @CNPJ, @InscricaoEstadual, @Email, @Fone)";
+                cmd.CommandText = @"INSERT INTO Fornecedor(Nome, Fone, Email, Website) VALUES(@Nome, @Fone, @Email, @Site)";
                 cmd.CommandType = System.Data.CommandType.Text;
 
-                cmd.Parameters.AddWithValue("@NomeSocial", _fornecedor.NomeSocial);
-                cmd.Parameters.AddWithValue("@RazaoSocial", _fornecedor.RazaoSocial);
-                cmd.Parameters.AddWithValue("@CNPJ", _fornecedor.CNPJ);
-                cmd.Parameters.AddWithValue("@InscricaoEstadual", _fornecedor.InscricaoEstadual);
-                cmd.Parameters.AddWithValue("@Email", _fornecedor.Email);
-                cmd.Parameters.AddWithValue("@Fone", _fornecedor.Fone);
+                cmd.Parameters.AddWithValue("@Nome", fornecedor.Nome);
+                cmd.Parameters.AddWithValue("@Fone", fornecedor.Fone);
+                cmd.Parameters.AddWithValue("@Email", fornecedor.Email);
+                cmd.Parameters.AddWithValue("@Site", fornecedor.Site);
 
                 cmd.Connection = cn;
                 cn.Open();
@@ -33,7 +28,7 @@ namespace DAL
             }
             catch (Exception ex)
             {
-                throw new Exception("Ocorreu um erro ao tentar inserir um fornecedor no banco de dados", ex) { Data = { { "Id", 22 } } };
+                throw new Exception("Ocorreu um erro ao tentar inserir um fornecedor no banco de dados", ex) { Data = { { "Id", 33 } } };
             }
             finally
             {
@@ -42,15 +37,14 @@ namespace DAL
         }
         public List<Fornecedor> BuscarTodos()
         {
-            List<Fornecedor> fornecedorList = new List<Fornecedor>();
-            Fornecedor fornecedor = new Fornecedor();
+            List<Fornecedor> fornecedores = new List<Fornecedor>();
 
             SqlConnection cn = new SqlConnection(Conexao.StringDeConexao);
             try
             {
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = cn;
-                cmd.CommandText = "SELECT Id, NomeSocial, RazaoSocial, CNPJ, InscricaoEstadual, Email, Fone FROM Fornecedor";
+                cmd.CommandText = "SELECT Id, Nome, Fone, Email, Website FROM Fornecedor";
                 cmd.CommandType = System.Data.CommandType.Text;
 
                 cn.Open();
@@ -59,74 +53,29 @@ namespace DAL
                 {
                     while (rd.Read())
                     {
-                        fornecedor = new Fornecedor();
+                        Fornecedor fornecedor = new Fornecedor();
                         fornecedor.Id = (int)rd["Id"];
-                        fornecedor.NomeSocial = rd["NomeSocial"].ToString();
-                        fornecedor.RazaoSocial = rd["RazaoSocial"].ToString();
-                        fornecedor.CNPJ = rd["CNPJ"].ToString();
-                        fornecedor.InscricaoEstadual = rd["InscricaoEstadual"].ToString();
-                        fornecedor.Email = rd["Email"].ToString();
+                        fornecedor.Nome = rd["Nome"].ToString();
                         fornecedor.Fone = rd["Fone"].ToString();
+                        fornecedor.Email = rd["Email"].ToString();
+                        fornecedor.Site = rd["Website"].ToString();
 
-                        fornecedorList.Add(fornecedor);
+                        fornecedores.Add(fornecedor);
                     }
                 }
-                return fornecedorList;
+
+                return fornecedores;
             }
             catch (Exception ex)
             {
-                throw new Exception("Ocorreu um erro ao tentar buscar um Fornecedor por Id no banco de dados.", ex) { Data = { { "Id", 23 } } };
+                throw new Exception("Ocorreu um erro ao tentar buscar fornecedores no banco de dados.", ex) { Data = { { "Id", 34 } } };
             }
             finally
             {
                 cn.Close();
             }
         }
-        public List<Fornecedor> BuscarPorNome(string _nome)
-        {
-            List<Fornecedor> fornecedorList = new List<Fornecedor>();
-            Fornecedor fornecedor = new Fornecedor();
-
-            SqlConnection cn = new SqlConnection(Conexao.StringDeConexao);
-            try
-            {
-                SqlCommand cmd = new SqlCommand();
-                cmd.Connection = cn;
-                cmd.CommandText = "SELECT Id, NomeSocial, RazaoSocial, CNPJ, InscricaoEstadual, Email, Fone FROM Fornecedor WHERE NomeSocial LIKE @NomeSocial";
-                cmd.CommandType = System.Data.CommandType.Text;
-                cmd.Parameters.AddWithValue("@NomeSocial", "%" + _nome + "%");
-
-
-                cn.Open();
-
-                using (SqlDataReader rd = cmd.ExecuteReader())
-                {
-                    while (rd.Read())
-                    {
-                        fornecedor = new Fornecedor();
-                        fornecedor.Id = (int)rd["Id"];
-                        fornecedor.NomeSocial = rd["NomeSocial"].ToString();
-                        fornecedor.RazaoSocial = rd["RazaoSocial"].ToString();
-                        fornecedor.CNPJ = rd["CNPJ"].ToString();
-                        fornecedor.InscricaoEstadual = rd["InscricaoEstadual"].ToString();
-                        fornecedor.Email = rd["Email"].ToString();
-                        fornecedor.Fone = rd["Fone"].ToString();
-
-                        fornecedorList.Add(fornecedor);
-                    }
-                }
-                return fornecedorList;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Ocorreu um erro ao tentar buscar Fornecedors por nome no banco de dados.", ex) { Data = { { "Id", 24 } } };
-            }
-            finally
-            {
-                cn.Close();
-            }
-        }
-        public Fornecedor BuscarPorId(int _id)
+        public Fornecedor BuscarPorId(int id)
         {
             Fornecedor fornecedor = new Fornecedor();
 
@@ -135,39 +84,79 @@ namespace DAL
             {
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = cn;
-                cmd.CommandText = "SELECT Id, NomeSocial, RazaoSocial, CNPJ, InscricaoEstadual, Email, Fone FROM Fornecedor WHERE Id = @Id";
+                cmd.CommandText = "SELECT Id, Nome, Fone, Email, Website FROM Fornecedor WHERE Id = @Id";
                 cmd.CommandType = System.Data.CommandType.Text;
-                cmd.Parameters.AddWithValue("@Id", _id);
-
+                cmd.Parameters.AddWithValue("@Id", id);
 
                 cn.Open();
 
                 using (SqlDataReader rd = cmd.ExecuteReader())
                 {
-                    while (rd.Read())
+                    if (rd.Read())
                     {
                         fornecedor.Id = (int)rd["Id"];
-                        fornecedor.NomeSocial = rd["NomeSocial"].ToString();
-                        fornecedor.RazaoSocial = rd["RazaoSocial"].ToString();
-                        fornecedor.CNPJ = rd["CNPJ"].ToString();
-                        fornecedor.InscricaoEstadual = rd["InscricaoEstadual"].ToString();
-                        fornecedor.Email = rd["Email"].ToString();
+                        fornecedor.Nome = rd["Nome"].ToString();
                         fornecedor.Fone = rd["Fone"].ToString();
-
+                        fornecedor.Email = rd["Email"].ToString();
+                        fornecedor.Site = rd["Website"].ToString();
                     }
                 }
+
                 return fornecedor;
             }
             catch (Exception ex)
             {
-                throw new Exception("Ocorreu um erro ao tentar buscar um Fornecedor por nome no banco de dados.", ex) { Data = { { "Id", 25 } } };
+                throw new Exception("Ocorreu um erro ao tentar buscar fornecedor por Id no banco de dados.", ex) { Data = { { "Id", 35 } } };
+            }
+            finally
+            {
+
+
+                cn.Close();
+            }
+        }
+        public List<Fornecedor> BuscarPorNome(string nome)
+        {
+            List<Fornecedor> fornecedores = new List<Fornecedor>();
+
+            SqlConnection cn = new SqlConnection(Conexao.StringDeConexao);
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = cn;
+                cmd.CommandText = "SELECT Id, Nome, Fone, Email, Website FROM Fornecedor WHERE Nome LIKE @Nome";
+                cmd.CommandType = System.Data.CommandType.Text;
+                cmd.Parameters.AddWithValue("@Nome", "%" + nome + "%");
+
+                cn.Open();
+
+                using (SqlDataReader rd = cmd.ExecuteReader())
+                {
+                    while (rd.Read())
+                    {
+                        Fornecedor fornecedor = new Fornecedor();
+                        fornecedor.Id = (int)rd["Id"];
+                        fornecedor.Nome = rd["Nome"].ToString();
+                        fornecedor.Fone = rd["Fone"].ToString();
+                        fornecedor.Email = rd["Email"].ToString();
+                        fornecedor.Site = rd["Website"].ToString();
+
+                        fornecedores.Add(fornecedor);
+                    }
+                }
+
+                return fornecedores;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Ocorreu um erro ao tentar buscar fornecedores por nome no banco de dados.", ex) { Data = { { "Id", 36 } } };
             }
             finally
             {
                 cn.Close();
             }
         }
-        public Fornecedor BuscarPorCNPJ(string _cpf)
+        public Fornecedor BuscarPorSite(string site)
         {
             Fornecedor fornecedor = new Fornecedor();
 
@@ -176,56 +165,51 @@ namespace DAL
             {
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = cn;
-                cmd.CommandText = "SELECT Id, NomeSocial, RazaoSocial, CNPJ, InscricaoEstadual, Email, Fone FROM Fornecedor WHERE CNPJ = @CNPJ";
+                cmd.CommandText = "SELECT Id, Nome, Fone, Email, Website FROM Fornecedor WHERE Website LIKE @Site";
                 cmd.CommandType = System.Data.CommandType.Text;
-                cmd.Parameters.AddWithValue("@CPF", _cpf);
-
+                cmd.Parameters.AddWithValue("@Site", "%" + site + "%");
 
                 cn.Open();
 
                 using (SqlDataReader rd = cmd.ExecuteReader())
                 {
-                    while (rd.Read())
+                    if (rd.Read())
                     {
                         fornecedor.Id = (int)rd["Id"];
-                        fornecedor.NomeSocial = rd["NomeSocial"].ToString();
-                        fornecedor.RazaoSocial = rd["RazaoSocial"].ToString();
-                        fornecedor.CNPJ = rd["CNPJ"].ToString();
-                        fornecedor.InscricaoEstadual = rd["InscricaoEstadual"].ToString();
-                        fornecedor.Email = rd["Email"].ToString();
+                        fornecedor.Nome = rd["Nome"].ToString();
                         fornecedor.Fone = rd["Fone"].ToString();
-
+                        fornecedor.Email = rd["Email"].ToString();
+                        fornecedor.Site = rd["Website"].ToString();
                     }
                 }
+
                 return fornecedor;
             }
             catch (Exception ex)
             {
-                throw new Exception("Ocorreu um erro ao tentar buscar um Fornecedor por CNPJ no banco de dados.", ex) { Data = { { "Id", 26 } } };
+                throw new Exception("Ocorreu um erro ao tentar buscar fornecedor por site no banco de dados.", ex) { Data = { { "Id", 37 } } };
             }
             finally
             {
                 cn.Close();
             }
         }
-        public void Alterar(Fornecedor _fornecedor)
+        public void Alterar(Fornecedor fornecedor)
         {
             SqlConnection cn = new SqlConnection(Conexao.StringDeConexao);
             try
             {
                 SqlCommand cmd = cn.CreateCommand();
-                cmd.CommandText = @"UPDATE Fornecedor SET NomeSocial = @NomeSocial, RazaoSocial = @RazaoSocial, 
-                                    CNPJ = @CNPJ, InscricaoEstadual = @InscricaoEstadual, Email = @Email, Fone = @Fone 
+                cmd.CommandText = @"UPDATE Fornecedor SET Nome = @Nome, Fone = @Fone, 
+                                    Email = @Email, Website = @Site 
                                     WHERE Id = @Id";
                 cmd.CommandType = System.Data.CommandType.Text;
 
-                cmd.Parameters.AddWithValue("@Id", _fornecedor.Id);
-                cmd.Parameters.AddWithValue("@NomeSocial", _fornecedor.NomeSocial);
-                cmd.Parameters.AddWithValue("@RazaoSocial", _fornecedor.RazaoSocial);
-                cmd.Parameters.AddWithValue("@CNPJ", _fornecedor.CNPJ);
-                cmd.Parameters.AddWithValue("@InscricaoEstadual", _fornecedor.InscricaoEstadual);
-                cmd.Parameters.AddWithValue("@Email", _fornecedor.Email);
-                cmd.Parameters.AddWithValue("@Fone", _fornecedor.Fone);
+                cmd.Parameters.AddWithValue("@Id", fornecedor.Id);
+                cmd.Parameters.AddWithValue("@Nome", fornecedor.Nome);
+                cmd.Parameters.AddWithValue("@Fone", fornecedor.Fone);
+                cmd.Parameters.AddWithValue("@Email", fornecedor.Email);
+                cmd.Parameters.AddWithValue("@Site", fornecedor.Site);
 
                 cmd.Connection = cn;
                 cn.Open();
@@ -234,14 +218,14 @@ namespace DAL
             }
             catch (Exception ex)
             {
-                throw new Exception("Ocorreu um erro ao tentar alterar os dados de um Fornecedor no banco de dados", ex) { Data = { { "Id", 27 } } };
+                throw new Exception("Ocorreu um erro ao tentar alterar os dados de um fornecedor no banco de dados", ex) { Data = { { "Id", 38 } } };
             }
             finally
             {
                 cn.Close();
             }
         }
-        public void Excluir(int _id)
+        public void Excluir(int id)
         {
             SqlConnection cn = new SqlConnection(Conexao.StringDeConexao);
             try
@@ -249,18 +233,16 @@ namespace DAL
                 SqlCommand cmd = cn.CreateCommand();
                 cmd.CommandText = @"DELETE FROM Fornecedor WHERE Id = @Id";
                 cmd.CommandType = System.Data.CommandType.Text;
-
-                cmd.Parameters.AddWithValue("@Id", _id);
+                cmd.Parameters.AddWithValue("@Id", id);
 
                 cmd.Connection = cn;
                 cn.Open();
 
                 cmd.ExecuteNonQuery();
-
             }
             catch (Exception ex)
             {
-                throw new Exception("Ocorreu um erro ao tentar excluir um Fornecedor do banco de dados.", ex) { Data = { { "Id", 28 } } };
+                throw new Exception("Ocorreu um erro ao tentar excluir um fornecedor do banco de dados.", ex) { Data = { { "Id", 39 } } };
             }
             finally
             {

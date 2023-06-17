@@ -2,9 +2,6 @@
 using Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BLL
 {
@@ -24,14 +21,21 @@ namespace BLL
         }
         public Fornecedor BuscarPorId(int _id)
         {
-            return new FornecedorDAL().BuscarPorId(_id);
-        }
-        public Fornecedor BuscarPorCNPJ(string _CNPJ)
-        {
-            if (String.IsNullOrEmpty(_CNPJ))
-                throw new Exception("Informe um número de CNPJ") { Data = { { "Id", 37 } } };
+            Fornecedor fornecedor = new FornecedorDAL().BuscarPorId(_id);
 
-            return new FornecedorDAL().BuscarPorCNPJ(_CNPJ);
+            if (fornecedor == null)
+            {
+                throw new Exception("ID de Fornecedor não encontrado no banco de dados.") { Data = { { "Id", 45 } } };
+                // Ou você pode retornar null em vez de lançar uma exceção
+                // return null;
+            }
+
+            return fornecedor;
+        }
+
+        public Fornecedor BuscarPorSite(string _site)
+        {
+            return new FornecedorDAL().BuscarPorSite(_site);
         }
         public void Alterar(Fornecedor _fornecedor)
         {
