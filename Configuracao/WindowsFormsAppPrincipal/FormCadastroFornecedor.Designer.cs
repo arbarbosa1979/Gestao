@@ -48,6 +48,42 @@
             ((System.ComponentModel.ISupportInitialize)(this.fornecedorBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
+            // emailLabel
+            // 
+            emailLabel.AutoSize = true;
+            emailLabel.Location = new System.Drawing.Point(504, 67);
+            emailLabel.Name = "emailLabel";
+            emailLabel.Size = new System.Drawing.Size(41, 16);
+            emailLabel.TabIndex = 15;
+            emailLabel.Text = "Email";
+            // 
+            // foneLabel
+            // 
+            foneLabel.AutoSize = true;
+            foneLabel.Location = new System.Drawing.Point(5, 124);
+            foneLabel.Name = "foneLabel";
+            foneLabel.Size = new System.Drawing.Size(38, 16);
+            foneLabel.TabIndex = 16;
+            foneLabel.Text = "Fone";
+            // 
+            // nomeLabel
+            // 
+            nomeLabel.AutoSize = true;
+            nomeLabel.Location = new System.Drawing.Point(12, 67);
+            nomeLabel.Name = "nomeLabel";
+            nomeLabel.Size = new System.Drawing.Size(44, 16);
+            nomeLabel.TabIndex = 18;
+            nomeLabel.Text = "Nome";
+            // 
+            // siteLabel
+            // 
+            siteLabel.AutoSize = true;
+            siteLabel.Location = new System.Drawing.Point(257, 124);
+            siteLabel.Name = "siteLabel";
+            siteLabel.Size = new System.Drawing.Size(30, 16);
+            siteLabel.TabIndex = 19;
+            siteLabel.Text = "Site";
+            // 
             // labelCadastroCliente
             // 
             this.labelCadastroCliente.Dock = System.Windows.Forms.DockStyle.Top;
@@ -85,15 +121,6 @@
             // 
             this.fornecedorBindingSource.DataSource = typeof(Models.Fornecedor);
             // 
-            // emailLabel
-            // 
-            emailLabel.AutoSize = true;
-            emailLabel.Location = new System.Drawing.Point(504, 67);
-            emailLabel.Name = "emailLabel";
-            emailLabel.Size = new System.Drawing.Size(41, 16);
-            emailLabel.TabIndex = 15;
-            emailLabel.Text = "Email";
-            // 
             // emailTextBox
             // 
             this.emailTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.fornecedorBindingSource, "Email", true));
@@ -101,15 +128,6 @@
             this.emailTextBox.Name = "emailTextBox";
             this.emailTextBox.Size = new System.Drawing.Size(276, 22);
             this.emailTextBox.TabIndex = 16;
-            // 
-            // foneLabel
-            // 
-            foneLabel.AutoSize = true;
-            foneLabel.Location = new System.Drawing.Point(5, 124);
-            foneLabel.Name = "foneLabel";
-            foneLabel.Size = new System.Drawing.Size(38, 16);
-            foneLabel.TabIndex = 16;
-            foneLabel.Text = "Fone";
             // 
             // foneTextBox
             // 
@@ -119,15 +137,6 @@
             this.foneTextBox.Size = new System.Drawing.Size(250, 22);
             this.foneTextBox.TabIndex = 17;
             // 
-            // nomeLabel
-            // 
-            nomeLabel.AutoSize = true;
-            nomeLabel.Location = new System.Drawing.Point(12, 67);
-            nomeLabel.Name = "nomeLabel";
-            nomeLabel.Size = new System.Drawing.Size(44, 16);
-            nomeLabel.TabIndex = 18;
-            nomeLabel.Text = "Nome";
-            // 
             // nomeTextBox
             // 
             this.nomeTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.fornecedorBindingSource, "Nome", true));
@@ -135,15 +144,6 @@
             this.nomeTextBox.Name = "nomeTextBox";
             this.nomeTextBox.Size = new System.Drawing.Size(493, 22);
             this.nomeTextBox.TabIndex = 19;
-            // 
-            // siteLabel
-            // 
-            siteLabel.AutoSize = true;
-            siteLabel.Location = new System.Drawing.Point(257, 124);
-            siteLabel.Name = "siteLabel";
-            siteLabel.Size = new System.Drawing.Size(30, 16);
-            siteLabel.TabIndex = 19;
-            siteLabel.Text = "Site";
             // 
             // siteTextBox
             // 
@@ -171,6 +171,7 @@
             this.Controls.Add(this.labelCadastroCliente);
             this.Name = "FormCadastroFornecedor";
             this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.Text = "Cadastro de Fornecedor";
             this.Load += new System.EventHandler(this.FormCadastroFornecedor_Load);
             ((System.ComponentModel.ISupportInitialize)(this.fornecedorBindingSource)).EndInit();
