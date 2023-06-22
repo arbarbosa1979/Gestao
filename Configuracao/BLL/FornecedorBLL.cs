@@ -21,9 +21,10 @@ namespace BLL
         }
         public Fornecedor BuscarPorId(int _id)
         {
-            Fornecedor fornecedor = new FornecedorDAL().BuscarPorId(_id);
+            FornecedorDAL fornecedorDAL = new FornecedorDAL();
+            Fornecedor fornecedor = fornecedorDAL.BuscarPorId(_id);
 
-            if (fornecedor == null)
+            if (fornecedor.Id == 0)
             {
                 throw new Exception("ID de Fornecedor não encontrado no banco de dados.") { Data = { { "Id", 45 } } };
                 // Ou você pode retornar null em vez de lançar uma exceção
