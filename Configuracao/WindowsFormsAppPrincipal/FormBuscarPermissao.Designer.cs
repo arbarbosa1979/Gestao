@@ -304,7 +304,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Descricao;
         private System.Windows.Forms.BindingSource grupoUsuariosBindingSource;
         private System.Windows.Forms.DataGridView grupoUsuariosDataGridView;
-        private System.Windows.Forms.DataGridViewTextBoxColumn descricaoDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn NomeGrupo;
     }

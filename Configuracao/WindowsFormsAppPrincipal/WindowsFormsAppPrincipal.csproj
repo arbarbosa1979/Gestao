@@ -159,17 +159,17 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Resources\" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj">
-      <Project>{73ac7b3b-d0b5-4c85-a666-f1c718985368}</Project>
+      <Project>{5b4d2ad2-5ee7-4374-90b6-ac687459347d}</Project>
       <Name>BLL</Name>
     </ProjectReference>
     <ProjectReference Include="..\Models\Models.csproj">
-      <Project>{3a2aa774-09f2-4fbd-af22-9ae5b6da8892}</Project>
+      <Project>{de32def5-558a-4296-b0d3-acd19e2086e1}</Project>
       <Name>Models</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Resources\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -231,7 +231,6 @@
         private System.Windows.Forms.Button buttonExcluir;
         private System.Windows.Forms.Button buttonExcluirPermissaoGrupo;
         private System.Windows.Forms.Button buttonAdicionarPermissaoGrupo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
     }
 }
